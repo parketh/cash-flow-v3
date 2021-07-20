@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+
+.inputField {
+    @apply px-3 py-1 rounded-md bg-gray-200 hover:bg-theme-lighter focus:bg-theme-lighter focus:outline-none;
+}
+
+.sectionHeader {
+    @apply justify-center items-center bg-gray-100 w-full px-5 py-5 space-y-2 rounded-lg;
+}
+
+.bodyText {
+    @apply text-lg mb-8 font-medium text-gray-500;
+}
+
+.bodyTextTutorial {
+    @apply text-lg font-medium mb-8 leading-relaxed text-gray-500;
+}
+
+@tailwind utilities;

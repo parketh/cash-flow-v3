@@ -1,11 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import '../styles/globals.css'
+import '../styles/index.css'
 
 const App = ({ Component, pageProps }) => {
   return (
-    <div className="flex flex-col h-screen select-none">
+    <div className="flex flex-col h-screen">
       <Menubar />
       <Component {...pageProps} />
     </div>
@@ -15,7 +15,9 @@ const App = ({ Component, pageProps }) => {
 const Menubar = () => {
   const router = useRouter()
   const page = router.pathname.substring(router.pathname.lastIndexOf('/') + 1)
-  const pageName = (page === '' ? '' : (page === 'config' ? "Configuration" : "Download" ))
+  let pageName = page.charAt(0).toUpperCase() + page.slice(1)
+  pageName = pageName === 'Config' ? 'Configuration' : pageName
+  
   const showTitle = page === '' ? true : false
 
   return (
@@ -27,7 +29,8 @@ const Menubar = () => {
         <div className="col-span-2 text-center pt-1">
             <span className="text-theme text-xl font-semibold">{pageName}</span>
         </div>
-        <div className="col-span-1 pt-1 space-x-2 sm:space-x-4 w-24 text-right justify-self-end items-center">
+        <div className="col-span-1 pt-1 space-x-2 sm:space-x-4 w-36 text-right justify-self-end items-center">
+            <Link href='/tutorial' passHref><input type="image" className="w-6 mx-1 cursor-pointer" src='/images/tutorial.png' alt="config" /></Link>
             <Link href='/config' passHref><input type="image" className="w-6 cursor-pointer" src='/images/settings.png' alt="config" /></Link>
             <Link href='/download' passHref><input type="image" className="w-6 cursor-pointer" src='/images/download.png' alt="download" /></Link>
         </div>

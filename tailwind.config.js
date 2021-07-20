@@ -69,6 +69,21 @@ module.exports = {
           '50%': { opacity: '0%' },
           '100%': { opacity: '100%' }
         }
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            'ul li': {
+              '&::before':{
+                backgroundColor: '#1440aa'
+              }
+            },
+            'strong': {
+              color: '#1440aa',
+              fontWeight: 700
+            }
+          },
+        },
       }
     },
   },
@@ -80,5 +95,6 @@ module.exports = {
   },
   plugins: [
     require("tailwindcss-scrollbar"),
+    require('@tailwindcss/typography'),
   ],
 }
