@@ -81,6 +81,16 @@ module.exports = {
             'strong': {
               color: '#1440aa',
               fontWeight: 700
+            },
+            'h4': {
+              color: '#1440aa',
+              fontWeight: 700,
+              textAlign: 'center'
+            },
+            'h6': {
+              textAlign: 'center',
+              fontSize: 'small',
+              fontWeight: 600
             }
           },
         },

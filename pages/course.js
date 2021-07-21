@@ -1,6 +1,7 @@
 import React from 'react'
 import matter from 'gray-matter'
 import ReactMarkdown from 'react-markdown'
+import Link from 'next/link'
 
 const PostTemplate = ({ content }) => {
     return (
@@ -10,6 +11,12 @@ const PostTemplate = ({ content }) => {
                     <article className="prose prose-2xl">
                         <ReactMarkdown children={content} className="bodyTextTutorial" />
                     </article>
+                    <div className="flex align-middle space-x-2">
+                        <span className="bodyTextTutorial" >Let's get started!</span>
+                        <Link href={'/course/a-intro-1'} passHref>
+                            <input className="w-6 h-6" type="image" src="/images/next.png" alt="next" />
+                        </Link>
+                    </div>
                     <div className="mt-64"></div>
                 </div>
             </div>

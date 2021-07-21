@@ -1,15 +1,20 @@
-Welcome to the Cash Flow Tutorial!
+Welcome to the Cash Flow Valuation Course!
 
-In this tutorial, you're going to be learning to build a DCF model by valuing a company called Spotify (if you haven't heard of it, you've likely been living under a rock--but don't worry, you can still follow along!)
+In this course, you're going to be learning to build a Discounted Cash Flow (DCF) valuation model by valuing Spotify, the popular music streaming service. If you haven't heard of Spotify, you've probably been living under a rock--but don't worry, you can still follow along!
 
-This tutorial assumes no prior knowledge in finance, but will still be appropriate for those with finance training. By the end of the tutorial, you should have:
+This course requires **no prior knowledge of finance**. However, any prior experience you have with finance will certainly be helpful for more quickly grasping the material. 
 
- - a fully functional DCF model for Spotify that you can download and use
- - a working knowledge of valuation and just enough knowledge of finance and accounting to get started
- - a working knowledge of the Cash Flow tool, so you can use it to automatically create your own DCF models in the future.
+By the end of this course, you should have:
 
-The tutorial is divided into the following topics and lasts about 3 hours.
+ - a fully functional DCF valuation model for Spotify that you can download and use
+ - a conceptual framework for valuing any company, supplemented with just enough knowledge of finance and accounting concepts to get you started
+ - a working knowledge of the **Cash Flow** tool, which you can continue using to automatically generate your own DCF models in the future.
 
-[Introduction](tutorial/intro)
 
-Let's get started!
+The course is divided between the following topics and lasts about 3 hours.
+
+ - [Part A - Introduction](course/a-intro-1)
+ - [Part B - Valuation framework](course/b-framework-1)
+ - [Part C - Market](course/c-market-1)
+ - [Part D - Competition](course/d-competition-1)
+ - [Part E - Business model](course/e-business-1)

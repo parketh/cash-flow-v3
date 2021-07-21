@@ -255,7 +255,6 @@ const Submit = ({ submitForm, setSampleValues, clearForm , saveStatus }) => {
                 <div className="md:hidden"></div>
             </div>
         </div>
-            
     )
 }
 
