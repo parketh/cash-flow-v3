@@ -7,66 +7,80 @@ import gfm from 'remark-gfm'
 import FormService from "/services/FormService"
 import {CourseTopics, CourseIndex} from '/data/CourseIndex'
 
-class PostTemplate extends React.Component {
-    static async getInitialProps(context) {
-        const slug = context.query.slug
 
-        if (!slug) {
-            return {
+// export async function getStaticPaths() {
+//     const paths = CourseIndex.map((page) => ({
+//         params: { slug: page },
+//     }))
+
+//     console.log(paths)
+    
+//     return { paths, fallback: false }
+// }
+
+export async function getServerSideProps({ params }) {
+    const slug = params.slug
+    console.log(slug)
+
+    if (!slug) {
+        return {
+            props: {
                 data: {content: null},
                 current: null,
                 next: null,
                 previous: null
             }
         }
+    }
 
-        const index = CourseIndex.findIndex(page => page === slug)
-        
-        // Import our .md file using the `slug` from the URL
-        const content = await FormService.getPages(slug)
+    const index = CourseIndex.findIndex(page => page === slug)
+    
+    // Import our .md file using the `slug` from the URL
+    const content = await FormService.getPages(slug)
 
-        // Parse .md data through `matter`
-        const data = matter(content)
-        
-        // Pass data to our component props
-        return {
+    // Parse .md data through `matter`
+    const data = matter(content)
+    
+    // Pass data to our component props
+    return {
+        props: {
             data: { ...data },
             current: slug,
             next: {contents: CourseIndex[index + 1], show: (index === CourseIndex.length - 1) ? false : true},
             previous: {contents: CourseIndex[index - 1], show: (index === 0) ? false : true}
         }
     }
-    
-    render() {
-        const renderers = {
-            img: ({ alt, src, title }) => (
-                <div className="text-center justify-center flex -my-4">
-                    <img 
-                        alt={alt} 
-                        src={src} 
-                        title={title}
-                        className="max-w-xl block w-full"
-                    />
-                </div>
-            ),
-            p: props => <div className="mb-6" {...props} />
-        }
+}
 
-        return (
-            <div className="overflow-y-auto scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-50 scrollbar-w-2 scrollbar-thumb-rounded-full font-sans">
-                <div className="h-auto w-full px-5 py-5 space-y-2 flex justify-center">
-                    <div className="w-768">
-                        <ProgressBar current={this.props.current}/>
-                        <article className="prose prose-2xl">
-                            <ReactMarkdown children={this.props.data.content} className="bodyTextTutorial" remarkPlugins={[gfm]} transformImageUri={uri => uri.startsWith("http") ? uri : `/${uri}`} components={renderers} skipHtml={false}/>
-                        </article>
-                        <div className="mt-64"></div>
-                    </div>
-                    <NavBar previous={this.props.previous} next={this.props.next}/>
-                </div>
+const PostTemplate = ({ data, current, previous, next }) => {    
+    const renderers = {
+        img: ({ alt, src, title }) => (
+            <div className="text-center justify-center flex -my-4">
+                <img 
+                    alt={alt} 
+                    src={src} 
+                    title={title}
+                    className="max-w-xl block w-full"
+                />
             </div>
-        )
+        ),
+        p: props => <div className="mb-6" {...props} />
     }
+
+    return (
+        <div className="overflow-y-auto scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-50 scrollbar-w-2 scrollbar-thumb-rounded-full font-sans">
+            <div className="h-auto w-full px-5 py-5 space-y-2 flex justify-center">
+                <div className="w-768">
+                    <ProgressBar current={current}/>
+                    <article className="prose prose-2xl">
+                        <ReactMarkdown children={data.content} className="bodyTextTutorial" remarkPlugins={[gfm]} transformImageUri={uri => uri.startsWith("http") ? uri : `/${uri}`} components={renderers} skipHtml={false}/>
+                    </article>
+                    <div className="mt-64"></div>
+                </div>
+                <NavBar previous={previous} next={next}/>
+            </div>
+        </div>
+    )
 }
 
 const ProgressBar = ({ current }) => {
