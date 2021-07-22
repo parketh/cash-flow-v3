@@ -50,5 +50,6 @@
     "react-markdown": "^6.0.2",
     "tailwindcss": "^2.2.4",
     "webpack": "^5.45.1"
-  }
+  },
+  "cacheDirectories": [".next/cache"]
 }
