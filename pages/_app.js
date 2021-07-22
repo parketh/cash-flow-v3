@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import '../styles/index.css'
+import '/styles/index.css'
 
 const App = ({ Component, pageProps }) => {
   return (
@@ -22,7 +22,7 @@ const Menubar = () => {
   const showTitle = page === '' ? true : false
 
   return (
-    <div className="bg-white h-auto px-6 py-4 w-full grid grid-cols-4 sticky">
+    <div className="bg-white h-auto px-6 py-4 w-full grid grid-cols-4 sticky font-sans">
         <div className="col-span-1 flex space-x-4 w-48">
             <Link href='/' passHref><input type="image" className="mt-1 h-7 cursor-pointer" src='/images/logo.png' alt="logo" /></Link>
             <span className="mt-1 text-lg text-theme font-semibold" >{showTitle ? "Cash Flow" : ""}</span>

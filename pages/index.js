@@ -18,7 +18,7 @@ const Home = () => {
   
 
   return (
-      <div className="overflow-y-auto scrollbar scrollbar-thumb-gray-400 scrollbar-w-2 scrollbar-thumb-rounded-full select-none">
+      <div className="overflow-y-auto scrollbar scrollbar-thumb-gray-400 scrollbar-w-2 scrollbar-thumb-rounded-full select-none font-sans">
           <div className="h-auto w-full justify-center">
               <div className="h-auto object-cover bg-no-repeat bg-right w-full justify-center flex mb-24" style={{backgroundImage: "url('images/logo-bg.png')", backgroundSize: "300px"}} ref={heroRef}>
                   <div className="w-768 px-5 py-5">

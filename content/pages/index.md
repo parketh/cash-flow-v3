@@ -13,8 +13,8 @@ By the end of this course, you should have:
 
 The course is divided between the following topics and lasts about 3 hours.
 
- - [Part A - Introduction](course/a-intro-1)
- - [Part B - Valuation framework](course/b-framework-1)
- - [Part C - Market](course/c-market-1)
- - [Part D - Competition](course/d-competition-1)
- - [Part E - Business model](course/e-business-1)
+ - Part A - Introduction
+ - Part B - Valuation framework
+ - Part C - Market
+ - Part D - Competition
+ - Part E - Business model

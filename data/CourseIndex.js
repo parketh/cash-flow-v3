@@ -33,25 +33,25 @@ const CourseTopics = [
         index: 5,
         name: 'Costs (E4)',
         slug: 'costs',
-        numPages: 0
+        numPages: 1
     },
     {
         index: 6,
         name: 'Stage of growth (E5)',
         slug: 'growth',
-        numPages: 0
+        numPages: 1
     },
     {
         index: 7,
         name: 'Risk factors (E6)',
         slug: 'risks',
-        numPages: 0
+        numPages: 1
     },
     {
         index: 8,
         name: 'Financing (E7)',
         slug: 'financing',
-        numPages: 0
+        numPages: 1
     },
 ]
 
@@ -66,14 +66,15 @@ const numToLetter = (n) => {
     return result
 }
 
-const CourseIndex = CourseTopics.map(topic => {
-    let pages = ['index']
+let CourseIndex = CourseTopics.map(topic => {
+    let pages = []
     for (let i = 1; i <= topic.numPages; i++) {
         pages.push(numToLetter(topic.index) + '-' + topic.slug + '-' + i)
     }
     return pages
 }).flat()
 
+CourseIndex.unshift('index')
 
 module.exports = {
     CourseTopics: CourseTopics,

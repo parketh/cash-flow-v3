@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 const PostTemplate = ({ content }) => {
     return (
-        <div className="overflow-y-auto scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-50 scrollbar-w-2 scrollbar-thumb-rounded-full">
+        <div className="overflow-y-auto scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-50 scrollbar-w-2 scrollbar-thumb-rounded-full font-sans">
             <div className="h-auto w-full px-5 py-5 space-y-2 flex justify-center">
                 <div className="w-768">
                     <article className="prose prose-2xl">

@@ -1,6 +1,6 @@
 module.exports = {
   mode: 'jit',
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}', './data/**/*.{js,ts,jsx,tsx}', './services/**/*.{js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -38,13 +38,11 @@ module.exports = {
       borderWidth: {
         '1': '1px'
       },
-      fontFamily: {
-        'serif': 'Roboto'
-      },
       spacing: {
         768: '48rem',
         496: '31rem',
-        400: '25rem'
+        400: '25rem',
+        1.75: '0.4375rem'
       },
       outline: {
         theme: '1px solid #1440aa'

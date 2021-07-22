@@ -1,22 +1,32 @@
-import React, { useRef, useCallback } from 'react'
+import React, { useRef } from 'react'
 import matter from 'gray-matter'
 import ReactMarkdown from 'react-markdown'
 import Link from 'next/link'
 import gfm from 'remark-gfm'
 
-import {CourseTopics, CourseIndex} from '../../data/CourseIndex'
-
-const baseImageUrl = 'http://localhost:3000'
+import FormService from "/services/FormService"
+import {CourseTopics, CourseIndex} from '/data/CourseIndex'
 
 class PostTemplate extends React.Component {
-    static async getInitialProps (context) {
-        const { slug } = context.query
+    static async getInitialProps(context) {
+        const slug = context.query.slug
+
+        if (!slug) {
+            return {
+                data: {content: null},
+                current: null,
+                next: null,
+                previous: null
+            }
+        }
+
         const index = CourseIndex.findIndex(page => page === slug)
+        
         // Import our .md file using the `slug` from the URL
-        const content = await import(`../../content/pages/${slug}.md`)
+        const content = await FormService.getPages(slug)
 
         // Parse .md data through `matter`
-        const data = matter(content.default)
+        const data = matter(content)
         
         // Pass data to our component props
         return {
@@ -43,12 +53,12 @@ class PostTemplate extends React.Component {
         }
 
         return (
-            <div className="overflow-y-auto scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-50 scrollbar-w-2 scrollbar-thumb-rounded-full">
+            <div className="overflow-y-auto scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-50 scrollbar-w-2 scrollbar-thumb-rounded-full font-sans">
                 <div className="h-auto w-full px-5 py-5 space-y-2 flex justify-center">
                     <div className="w-768">
                         <ProgressBar current={this.props.current}/>
                         <article className="prose prose-2xl">
-                            <ReactMarkdown children={this.props.data.content} className="bodyTextTutorial" remarkPlugins={[gfm]} transformImageUri={uri => uri.startsWith("http") ? uri : `${baseImageUrl}/${uri}`} components={renderers} skipHtml={false}/>
+                            <ReactMarkdown children={this.props.data.content} className="bodyTextTutorial" remarkPlugins={[gfm]} transformImageUri={uri => uri.startsWith("http") ? uri : `/${uri}`} components={renderers} skipHtml={false}/>
                         </article>
                         <div className="mt-64"></div>
                     </div>
@@ -60,6 +70,12 @@ class PostTemplate extends React.Component {
 }
 
 const ProgressBar = ({ current }) => {
+    if (!current) {
+        return (
+            <div></div>
+        )
+    }
+    
     const numToLetter = (n) => {
         let result = ''
         do {
@@ -92,20 +108,9 @@ const ProgressBar = ({ current }) => {
     )
 }
 
-const ProgressBarTopics = ({ topics, currTopic }) => {
-    const scrollRef = useRef()
-
-    const executeScroll = useCallback(node => {
-        const container = scrollRef.current
-        if (node !== null) {
-            container.scrollTo({
-                left: node.getBoundingClientRect().left,
-                behavior: "smooth"
-            })
-        }
-    }, []);
-    
+const ProgressBarTopics = ({ topics, currTopic }) => {    
     const onWheel = (event) => {
+        event.preventDefault()
         const container = scrollRef.current
         const containerScrollPosition = scrollRef.current.scrollLeft
     
@@ -116,19 +121,20 @@ const ProgressBarTopics = ({ topics, currTopic }) => {
         })
     }
 
+    const scrollRef = useRef()
+
     return (
         <div className="relative ">
             <div className="overflow-x-auto scrollbar flex border-b-1 pb-4 mb-3" ref={scrollRef} onWheel={onWheel}>
                 {topics.map(topic => {
                     if (topic.index < currTopic) {
-                        console.log("topic.index < currTopic")
                         return (
                             <ProgressBarTopicItem topic={topic} imgSrc='/images/progress-done.png' alt="progress-done" style1="cursor-pointer" style2="text-white" style3="cursor-pointer" />
                         )
                     }
                     else if (topic.index === currTopic) {
                         return (
-                            <ProgressBarTopicItem topic={topic} imgSrc='/images/progress-current.png' alt="progress-current" style1="text-theme" style3="text-theme" enableLink={false} ref={executeScroll} />
+                            <ProgressBarTopicItem topic={topic} imgSrc='/images/progress-current.png' alt="progress-current" style1="text-theme" style3="text-theme" enableLink={false} />
                         )
                     }
                     return (
@@ -147,7 +153,7 @@ const ProgressBarTopicItem = ({ topic, imgSrc, imgAlt, style1, style2, style3 })
             <div className={"grid grid-rows-2 justify-items-center z-50 " + style1} key={topic.index}>
                 <div className="relative mb-1">
                     <img className="w-8" src={imgSrc} alt={imgAlt} />
-                    <div className={"absolute bottom-0 pb-1.5 w-full text-center font-medium text-sm " + style2}>{topic.letter}</div>
+                    <div className={"absolute top-0 pt-2 w-full text-center font-medium text-xs " + style2}>{topic.letter}</div>
                 </div>
                 <span className={"mx-4 w-24 text-center mt-1 text-xs font-semibold tracking-wide " + style3}>{topic.name}</span>
             </div>
@@ -211,6 +217,11 @@ const ProgressBarPageItem = ({ page, imgSrc, imgAlt, style1, style2 }) => {
 }
 
 const NavBar = ({ previous, next }) => {
+    if (!previous || !next) {
+        return (
+            <div></div>
+        )
+    }
     return (
         <div className="flex absolute bottom-0 bg-white h-32 md:h-20 w-screen bg-opacity-0 justify-center align-middle select-none">
             <div className="flex flex-wrap backdrop-filter backdrop-blur-lg bg-opacity-30 border-t border-gray-200 justify-center py-3 w-screen h-full space-x-4">

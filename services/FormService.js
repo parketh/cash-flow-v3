@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const url = 'http://localhost:3001'  // for development build
-// const url = ''                          // for production build
+// const url = 'http://localhost:3001'  // for development build
+const url = ''                          // for production build
 const formID = '60e8c2ed73b100779c3356fd'
 
 const retrieveForm = () => {
@@ -52,6 +52,14 @@ const submitFeedback = (feedback) => {
     return axios.post(`${url}/feedback/${formID}`, feedback).then(response => response.data)
 }
 
-const exportedServices = { retrieveForm, updateForm, getCompanies, createCompany, updateCompany, removeCompany, downloadFile, submitFeedback }
+const getPages = (slug) => {
+    return axios({
+        url: `${url}/coursepages/${slug}`,
+        method: "GET",
+        headers: { 'Content-Type': 'text/markdown' }
+    }).then(response => response.data)
+}
+
+const exportedServices = { retrieveForm, updateForm, getCompanies, createCompany, updateCompany, removeCompany, downloadFile, submitFeedback, getPages }
 
 export default exportedServices

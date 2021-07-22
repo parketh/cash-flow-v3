@@ -66,7 +66,7 @@ const Download = () => {
 
     if (allowDL) {
         return (
-            <div className="overflow-y-auto scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-50 scrollbar-w-2 scrollbar-thumb-rounded-full select-none">
+            <div className="overflow-y-auto scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-50 scrollbar-w-2 scrollbar-thumb-rounded-full select-none font-sans">
                 <div className="h-auto w-full px-5 py-5 space-y-2 flex justify-center">
                     <div className="w-768">
                         {<SectionHeader title="DOWNLOAD" subtitle="Download your valuation model"/>}

@@ -172,7 +172,7 @@ const Configuration = () => {
     }
 
     return (
-        <div className="overflow-y-auto scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-50 scrollbar-w-2 scrollbar-thumb-rounded-full select-none">
+        <div className="overflow-y-auto scrollbar scrollbar-thumb-gray-400 scrollbar-track-gray-50 scrollbar-w-2 scrollbar-thumb-rounded-full select-none font-sans">
             <div className="h-auto w-full px-5 py-5 space-y-2 flex justify-center">
                 <div className="w-768">
                     <form>
@@ -364,8 +364,8 @@ const Comparables = ({ responses, setResponses }) => {
 const Confirmation = ({ showConfirm, handleShowConfirm }) => {
     if (showConfirm) {
         return (
-            <div className="align-middle" >
-                <img className="w-5 mt-1" src="/images/check.png" onClick={handleShowConfirm} alt="check" width={20} height={20} />
+            <div className="flex py-1.5">
+                <img src="/images/check.png" onClick={handleShowConfirm} alt="check" width={20} height={20} />
             </div>
         )
     } else {
