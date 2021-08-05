@@ -1,29 +1,25 @@
-const { CourseIndex } = require('./data/CourseIndex')
+const path = require("path")
 
 module.exports = {
-    exportPathMap: async (defaultPathMap) => {
-        let pathMap = {
-            '/': { page: '/' },
-            '/config': { page: '/config'},
-            '/download': { page: '/download' },
-            '/course': { page: '/course'},
-        }
-
-        const coursePages = CourseIndex.shift()
-        coursePages.map(page => {
-            pathMap[`/course/${page}`] = { page: '/course', query: { slug: page } }
-        })
-
-        return pathMap
-    },    
     webpack: (config) => {
         config.module.rules.push({
-        test: /\.md$/,
-        use: 'raw-loader',
+            test: /\.md$/,
+            use: "raw-loader",
         })
+        config.resolve.alias = {
+            ...config.resolve.alias,
+            "@Elements": path.resolve(__dirname, "components/elements"),
+            "@Modules": path.resolve(__dirname, "components/modules"),
+            "@Sections": path.resolve(__dirname, "components/sections"),
+            "@Layouts": path.resolve(__dirname, "components/layouts"),
+            "@FormOptions": path.resolve(__dirname, "data/form-options"),
+            "@FormValues": path.resolve(__dirname, "data/form-values"),
+            "@CourseIndex": path.resolve(__dirname, "data/course-index"),
+            "~": path.resolve(__dirname),
+        }
         return config
     },
     eslint: {
         ignoreDuringBuilds: true,
-    }
+    },
 }

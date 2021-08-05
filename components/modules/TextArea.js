@@ -1,18 +1,18 @@
 import React, { Component } from "react"
 import handleViewport from "react-in-viewport"
-import FieldLabel from "./FieldLabel"
-import Alert from "./Alert"
+import FieldLabel from "@Elements/FieldLabel"
+import Alert from "@Elements/Alert"
 
 class TextArea extends Component {
     getStyle() {
         const { inViewport, enterCount } = this.props
         if (inViewport && enterCount === 1) {
-            return "animate-fadeIn";
+            return "animate-fadeIn"
         } else {
-            return "";
+            return ""
         }
     }
-    
+
     render() {
         return (
             <div className={this.getStyle()}>
@@ -24,7 +24,9 @@ class TextArea extends Component {
                         id={this.props.id}
                         value={this.props.response || ""}
                         onChange={this.props.handleResponseChange}
-                        className={(this.props.showAlert ? "inputField border-1 border-accent" : "inputField") + " h-32"}
+                        className={
+                            (this.props.showAlert ? "inputField border-1 border-accent" : "inputField") + " h-32"
+                        }
                         required
                     />
                     <Alert showAlert={this.props.showAlert} label={this.props.label} />
@@ -34,6 +36,6 @@ class TextArea extends Component {
     }
 }
 
-const MySection = handleViewport(TextArea, { rootMargin: '-1.0px' });
+const MySection = handleViewport(TextArea, { rootMargin: "-1.0px" })
 
 export default MySection

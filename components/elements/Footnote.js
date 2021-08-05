@@ -1,25 +1,25 @@
 import React, { Component } from "react"
 import handleViewport from "react-in-viewport"
 
-class FieldLabel extends Component {
+class Footnote extends Component {
     getStyle() {
         const { inViewport, enterCount } = this.props
         if (inViewport && enterCount === 1) {
-            return "animate-easeInSlow";
+            return "animate-fadeIn"
         } else {
-            return "";
+            return ""
         }
     }
-    
+
     render() {
         return (
             <div className={this.getStyle()}>
-                <span className={"font-bold text-xs"}>{ this.props.label }</span>
+                <span className="inline-block text-sm italic">{this.props.text}</span>
             </div>
         )
     }
 }
 
-const MySection = handleViewport(FieldLabel, { rootMargin: '-1.0px' });
+const FootnoteWrapped = handleViewport(Footnote, { rootMargin: "-1.0px" })
 
-export default MySection
+export default FootnoteWrapped
