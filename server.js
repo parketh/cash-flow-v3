@@ -3,9 +3,11 @@ const express = require("express")
 const next = require("next")
 const cors = require("cors")
 const fs = require("fs")
+const bcrypt = require("bcrypt")
 
 const GenerateModel = require("./services/GenerateModel")
 const { Form, Comp, Feedback } = require("./models/form")
+const User = require("./models/user")
 
 const dev = process.env.NODE_ENV !== "production"
 const app = next({ dev })
@@ -198,6 +200,30 @@ app.prepare().then(() => {
 
     server.get("*", (req, res) => {
         return handle(req, res)
+    })
+
+    // Create new user
+    server.post("/api/users", async (request, response) => {
+        const body = request.body
+
+        const saltRounds = 10
+        const passwordHash = await bcrypt.hash(body.password, saltRounds)
+
+        const user = new User({
+            username: body.username,
+            name: body.name,
+            passwordHash,
+        })
+
+        const savedUser = await user.save()
+
+        response.json(savedUser)
+    })
+
+    // Get all users
+    server.get("/api/users", async (request, response) => {
+        user = await User.find({})
+        response.json(user)
     })
 
     const port = process.env.PORT
