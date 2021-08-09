@@ -109,5 +109,5 @@ module.exports = {
             borderColor: ["focus"],
         },
     },
-    plugins: [require("tailwindcss-scrollbar"), require("@tailwindcss/typography")],
+    plugins: [require("tailwind-scrollbar"), require("@tailwindcss/typography")],
 }

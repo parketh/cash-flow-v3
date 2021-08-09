@@ -41,6 +41,24 @@ class PostTemplate extends React.Component {
         }
     }
 
+    constructor(props) {
+        super(props)
+        this.scrollRef = React.createRef()
+        this.state = {
+            allowScrolling: true,
+        }
+        this.toggleScrolling = this.toggleScrolling.bind(this)
+    }
+
+    toggleScrolling() {
+        this.setState({ allowScrolling: !this.state.allowScrolling })
+        if (this.state.allowScrolling) {
+            this.scrollRef.current.style.overflow = "hidden"
+        } else {
+            this.scrollRef.current.style.overflow = "auto"
+        }
+    }
+
     render() {
         const renderers = {
             img: ({ alt, src, title }) => (
@@ -53,20 +71,29 @@ class PostTemplate extends React.Component {
 
         return (
             <>
-                <DefaultLayout>
-                    <ProgressBar current={this.props.current} />
-                    <article className="prose prose-2xl">
-                        <ReactMarkdown
-                            children={this.props.data.content}
-                            className="bodyTextTutorial"
-                            remarkPlugins={[gfm]}
-                            transformImageUri={(uri) => (uri.startsWith("http") ? uri : `/${uri}`)}
-                            components={renderers}
-                            skipHtml={false}
-                        />
-                    </article>
-                    <div className="mt-64"></div>
-                </DefaultLayout>
+                <div
+                    className="overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 select-none font-sans"
+                    ref={this.scrollRef}
+                >
+                    <div className="h-auto w-full space-y-2 flex justify-center">
+                        <div className="w-screen max-w-768 px-5 py-5">
+                            <div onMouseEnter={this.toggleScrolling} onMouseLeave={this.toggleScrolling}>
+                                <ProgressBar current={this.props.current} />
+                            </div>
+                            <article className="prose prose-2xl">
+                                <ReactMarkdown
+                                    children={this.props.data.content}
+                                    className="bodyTextTutorial"
+                                    remarkPlugins={[gfm]}
+                                    transformImageUri={(uri) => (uri.startsWith("http") ? uri : `/${uri}`)}
+                                    components={renderers}
+                                    skipHtml={false}
+                                />
+                            </article>
+                            <div className="mt-64"></div>
+                        </div>
+                    </div>
+                </div>
                 <NavBar previous={this.props.previous} next={this.props.next} />
             </>
         )
@@ -99,23 +126,23 @@ const ProgressBar = ({ current }) => {
 
 const ProgressBarTopics = ({ topics, currTopic }) => {
     const onWheel = (event) => {
-        event.preventDefault()
         const container = scrollRef.current
-        const containerScrollPosition = scrollRef.current.scrollLeft
+        const containerScrollPositionX = container.scrollLeft
+        const containerScrollPositionY = container.scrollTop
 
         container.scrollTo({
-            top: 0,
-            left: containerScrollPosition + event.deltaY,
+            top: containerScrollPositionY,
+            left: containerScrollPositionX + event.deltaY,
             behaviour: "smooth",
         })
     }
 
-    const scrollRef = useRef(null)
+    const scrollRef = useRef()
 
     return (
         <div className="relative">
             <div
-                className="overflow-x-auto scrollbar scrollbar-thumb-gray-400 scrollbar-thumb-rounded-full inline-flex border-b-1 pb-4 mb-3 w-full"
+                className="overflow-x-auto scrollbar scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 inline-flex border-b-1 pb-5 mb-3 w-full"
                 ref={scrollRef}
                 onWheel={onWheel}
             >
@@ -215,7 +242,7 @@ const ProgressBarPages = ({ currTopic, numToLetter, currPage }) => {
                     imgSrc = "/images/progress-none.png"
                     imgAlt = "progress-none"
                     wrapperStyle = "cursor-pointer"
-                    textStyle = "text-gray-500"
+                    textStyle = "text-gray-400"
                 }
 
                 return (
@@ -234,13 +261,13 @@ const ProgressBarPages = ({ currTopic, numToLetter, currPage }) => {
     )
 }
 
-const ProgressBarPageItem = ({ page, imgSrc, imgAlt, style1, style2 }) => {
+const ProgressBarPageItem = ({ page, imgSrc, imgAlt, wrapperStyle, textStyle }) => {
     return (
         <div key={page.id}>
             <Link href={"/course/" + page.url} passHref>
-                <div className={"relative mb-1 justify-items-center mx-3 " + style1}>
+                <div className={"relative mb-1 justify-items-center mx-3 " + wrapperStyle}>
                     <img className="w-7" src={imgSrc} alt={imgAlt} />
-                    <div className={"absolute bottom-0 pb-1 w-full text-center font-medium text-sm " + style2}>
+                    <div className={"absolute bottom-0 pb-1 w-full text-center font-medium text-sm " + textStyle}>
                         {page.letter}
                     </div>
                 </div>
