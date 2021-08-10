@@ -3,35 +3,35 @@ import axios from "axios"
 const dev = process.env.NODE_ENV !== "production"
 
 const url = dev ? "http://localhost:3001" : ""
-const formID = "60e8c2ed73b100779c3356fd"
+const formID = "611267fd5e69bc8134736cbf"
 
 const retrieveForm = () => {
-    return axios.get(`${url}/responses/${formID}`).then((response) => response.data)
+    return axios.get(`${url}/api/forms/${formID}`).then((response) => response.data)
 }
 
 const updateForm = (updatedForm) => {
-    return axios.put(`${url}/responses/${formID}`, updatedForm).then((response) => response.data)
+    return axios.put(`${url}/api/forms/${formID}`, updatedForm).then((response) => response.data)
 }
 
 const getCompanies = () => {
-    return axios.get(`${url}/responses/${formID}/comps`).then((response) => response.data)
+    return axios.get(`${url}/api/forms/${formID}/comps`).then((response) => response.data)
 }
 
 const createCompany = (companyObject) => {
-    return axios.post(`${url}/responses/${formID}/comps`, companyObject).then((response) => response.data)
+    return axios.post(`${url}/api/forms/${formID}/comps`, companyObject).then((response) => response.data)
 }
 
 const updateCompany = (id, companyObject) => {
-    return axios.put(`${url}/responses/${formID}/comps/${id}`, companyObject).then((response) => response.data)
+    return axios.put(`${url}/api/forms/${formID}/comps/${id}`, companyObject).then((response) => response.data)
 }
 
 const removeCompany = (id) => {
-    return axios.delete(`${url}/responses/${formID}/comps/${id}`)
+    return axios.delete(`${url}/api/forms/${formID}/comps/${id}`)
 }
 
 const downloadFile = () => {
     return axios({
-        url: `${url}/download/${formID}`,
+        url: `${url}/api/download/${formID}`,
         method: "GET",
         headers: {
             "Content-Disposition": "attachment; filename=dcf_model.xlsx",
@@ -49,12 +49,12 @@ const downloadFile = () => {
 }
 
 const submitFeedback = (feedback) => {
-    return axios.post(`${url}/feedback/${formID}`, feedback).then((response) => response.data)
+    return axios.post(`${url}/api/feedback/${formID}`, feedback).then((response) => response.data)
 }
 
 const getPages = (slug) => {
     return axios({
-        url: `${url}/coursepages/${slug}`,
+        url: `${url}/api/coursepages/${slug}`,
         method: "GET",
         headers: { "Content-Type": "text/markdown" },
     }).then((response) => response.data)

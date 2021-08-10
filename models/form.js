@@ -51,17 +51,7 @@ const formSchema = new mongoose.Schema({
     },
 })
 
-const feedbackSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    message: String,
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-    },
-})
-
-const schemas = [compSchema, formSchema, feedbackSchema]
+const schemas = [compSchema, formSchema]
 
 schemas.forEach((s) => {
     s.set("toJSON", {
@@ -76,5 +66,4 @@ schemas.forEach((s) => {
 module.exports = {
     Form: mongoose.model("Form", formSchema),
     Comp: mongoose.model("Comp", compSchema),
-    Feedback: mongoose.model("Feedback", feedbackSchema),
 }

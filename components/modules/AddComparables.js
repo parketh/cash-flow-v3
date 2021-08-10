@@ -68,16 +68,15 @@ const AddComparables = ({ responses, setResponses }) => {
                         responses.comps.filter((comp) => comp.name === newComp)[0].id,
                         newEntry
                     ).then((returnedComps) => setResponses({ ...responses, comps: returnedComps }))
-                    handleShowConfirm()
                 }
             } else {
                 FormService.createCompany(newEntry).then((returnedComps) =>
                     setResponses({ ...responses, comps: returnedComps })
                 )
-                setNewComp("")
-                setNewCompCiq("")
-                handleShowConfirm()
             }
+            setNewComp("")
+            setNewCompCiq("")
+            handleShowConfirm()
         }
     }
 
@@ -104,8 +103,8 @@ const AddComparables = ({ responses, setResponses }) => {
                 <Button
                     onClick={addOrUpdateComp}
                     value="Add"
-                    styles1="w-20 h-8 text-sm"
-                    styles2="h-full w-full rounded font-bold bg-theme-lighter text-theme hover:bg-theme-light active:bg-theme-medium text-center"
+                    wrapperStyle="w-20 h-8 text-sm"
+                    buttonStyle="h-full w-full rounded font-bold bg-theme-lighter text-theme hover:bg-theme-light active:bg-theme-medium text-center"
                 />
                 <ConfirmationIndicator showConfirm={showConfirm} handleShowConfirm={handleShowConfirm} />
             </div>

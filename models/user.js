@@ -8,13 +8,13 @@ const userSchema = new mongoose.Schema({
     },
     name: String,
     passwordHash: String,
-    responses: [
+    forms: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Response",
+            ref: "Form",
         },
     ],
-    feedback: [
+    feedbacks: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Feedback",

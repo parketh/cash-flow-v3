@@ -15,6 +15,7 @@ module.exports = {
             "@FormOptions": path.resolve(__dirname, "data/form-options"),
             "@FormValues": path.resolve(__dirname, "data/form-values"),
             "@CourseIndex": path.resolve(__dirname, "data/course-index"),
+            "@Models": path.resolve(__dirname, "models"),
             "~": path.resolve(__dirname),
         }
         return config
