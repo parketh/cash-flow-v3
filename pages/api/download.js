@@ -1,5 +1,5 @@
 import { Form } from "@Models/form"
-import GenerateModel from "@Services/GenerateModel"
+import generateModel from "@Services/GenerateModel"
 import { existsSync, unlinkSync } from "fs"
 import { join } from "path"
 
