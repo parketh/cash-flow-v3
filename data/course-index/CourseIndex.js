@@ -3,7 +3,7 @@ const CourseTopics = [
         id: 0,
         name: "Introduction",
         slug: "intro",
-        numPages: 8,
+        numPages: 9,
     },
     {
         id: 1,
@@ -15,7 +15,7 @@ const CourseTopics = [
         id: 2,
         name: "Market of operation (E1)",
         slug: "market",
-        numPages: 5,
+        numPages: 6,
     },
     {
         id: 3,

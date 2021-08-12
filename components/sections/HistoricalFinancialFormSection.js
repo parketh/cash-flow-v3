@@ -5,7 +5,7 @@ import Footnote from "@Elements/Footnote"
 
 import DateField from "@Modules/DateField"
 import DropDownFieldWithLabel from "@Modules/DropDownFieldWithLabel"
-import IntSelectorField from "@Modules/IntSelectorField"
+import YearSelectorField from "@Modules/YearSelectorField"
 
 import RestatementTypes from "@FormOptions/RestatementTypes"
 import FilingModes from "@FormOptions/FilingModes"
@@ -33,12 +33,10 @@ const HistoricalFinancialFormSection = ({ responses, alerts, handleResponseChang
                     />
                 }
                 {
-                    <IntSelectorField
+                    <YearSelectorField
                         label="Historical period start (YYYY)"
                         placeholder="e.g. 2016"
                         step="1"
-                        min="2000"
-                        max="2021"
                         id="histStart"
                         response={responses.histStart}
                         handleResponseChange={handleResponseChange}
@@ -46,12 +44,10 @@ const HistoricalFinancialFormSection = ({ responses, alerts, handleResponseChang
                     />
                 }
                 {
-                    <IntSelectorField
+                    <YearSelectorField
                         label="Historical period end (YYYY)"
                         placeholder="e.g. 2018"
                         step="1"
-                        min="2000"
-                        max="2021"
                         id="histEnd"
                         response={responses.histEnd}
                         handleResponseChange={handleResponseChange}

@@ -1,5 +1,7 @@
-Valuing a business is a lot like telling a good story. There are seven elements of this particular story we will keep coming back to, and as I'm a fan of stating conclusions upfront, here they all are in order:
+The story of a company can be broken down into seven elements. As it is always helpful to state conclusions upfront, here they all are in order:
 
-### **Element 2. &nbsp; Who are the key competitors?** 
+### **Element 1. &nbsp; What market or markets does the company operate in?**
 
-Competition is another important factor for understanding the growth prospects of a company and its ability to earn excess returns in a market over time. In fact, economists predict that firms operating in markets with perfect competition will earn *zero* economic profits.
+One of the first things we should understand is what market, or markets, our company operates in. The financial performance of a company, meaning its revenue and costs, and prospects for growth, all derive at least in part from the market(s) in which it operates. Understanding the market(s) in which a company operates can often reveal 80% of the story, making it one of the most important indicators of value.
+
+Defining the market of operation is not always easy. A company like Coca Cola has a rather well-defined market (it sells beverages), but a company like Google is far more complex—it operates in online search, advertising, cloud computing, amongst other sectors. Working this out is the crucial first step to understanding a business and how it derives value.

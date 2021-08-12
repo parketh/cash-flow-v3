@@ -19,7 +19,7 @@ class DropDownField extends Component {
                 <div className="grid space-y-1">
                     <FieldLabel label={this.props.label} />
                     <select
-                        className={this.props.showAlert ? "inputField border-1 border-accent" : "inputField"}
+                        className={"inputField w-full " + (this.props.showAlert ? "border-1 border-accent" : "")}
                         id={this.props.id}
                         value={this.props.response}
                         onChange={this.props.handleResponseChange}

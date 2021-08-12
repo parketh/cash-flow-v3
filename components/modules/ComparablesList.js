@@ -17,7 +17,6 @@ class ComparablesList extends Component {
         event.preventDefault()
         const compToDelete = this.props.responses.comps.filter((comp) => comp.id === event.target.id)[0]
         if (window.confirm(`Delete ${compToDelete.name} ?`)) {
-            FormService.removeCompany(event.target.id)
             this.props.setResponses({
                 ...this.props.responses,
                 comps: this.props.responses.comps.filter((comp) => comp.id !== event.target.id),

@@ -54,7 +54,7 @@ const ConfigFormSection = ({ responses, alerts, handleResponseChange }) => {
                         id="curr"
                         response={responses.curr}
                         handleResponseChange={handleResponseChange}
-                        showAlert={alerts.companyName}
+                        showAlert={alerts.curr}
                     />
                 }
             </div>

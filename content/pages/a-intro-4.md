@@ -1,5 +1,11 @@
-Valuing a business is a lot like telling a good story. There are seven elements of this particular story we will keep coming back to, and as I'm a fan of stating conclusions upfront, here they all are in order:
+### **Element 3. &nbsp; How does the business make money?**
 
-### **Element 4. &nbsp; What are the company's costs, and how are they structured?** 
+In business, cash is king. The value of a company is simply equal to the amount of cash it will generate over its lifetime, so the first thing we should ask is—how does a business generate cash? There are three important questions we should answer:
 
-The cash that a company generates is not just what they bring in, but what they have left over after paying the costs of running a business. The structure of a business's fixed and variable costs can have important implications for the variability of its financial performance (i.e. its risk), and therefore how it finances its business. 
+_(A) Who are the company's customers?_
+
+_(B) What value does the company create for its customers?_
+
+_(C) What share of this value creation is the company able to capture in the form of cash revenues?_
+
+A company's revenues are the key driver of its financial performance, and these questions are the crucial first step to understanding how these revenues are derived.

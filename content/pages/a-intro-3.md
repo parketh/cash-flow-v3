@@ -1,11 +1,5 @@
-Valuing a business is a lot like telling a good story. There are seven elements of this particular story we will keep coming back to, and as I'm a fan of stating conclusions upfront, here they all are in order:
+### **Element 2. &nbsp; Who are the key competitors?**
 
-### **Element 3. &nbsp; How does the business make money?**
+Subsidiary to the market of operation is a company's competitors. Competition is a key driver of the growth prospects of a company and its ability to earn excess returns in a market over time. To take this to the extreme, economists predict that firms operating in markets with perfect competition will earn _zero_ economic profits in the long run.
 
-In business, cash is king. The value of a company is simply equal to the amount of cash it will generate over its lifetime, so the first thing we should ask is: How does a business generate cash? There are three important things we should identify upfront: 
-
-*(A) What market does the company serve?*
-
-*(B) What value does the company create for its customers in this market?*
-
-*(C) What share of the value creation is it able to capture in the form of cash revenues?*
+Defining a company's competitors is can be highly informative to a valuer. Studying a company's competitors often reveals a lot of information about the expected financial performance of a company. This is especially true where we expect a company to perform similarly to the wider market in which it operates.

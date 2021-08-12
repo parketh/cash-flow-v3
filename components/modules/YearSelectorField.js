@@ -3,7 +3,7 @@ import handleViewport from "react-in-viewport"
 import FieldLabel from "@Elements/FieldLabel"
 import Alert from "@Elements/Alert"
 
-class IntSelectorField extends Component {
+class YearSelectorField extends Component {
     getStyle() {
         const { inViewport, enterCount } = this.props
         if (inViewport && enterCount === 1) {
@@ -16,13 +16,11 @@ class IntSelectorField extends Component {
     render() {
         return (
             <div className={this.getStyle()}>
-                <div className="grid space-y-1">
+                <div className="space-y-1">
                     <FieldLabel label={this.props.label} />
                     <input
-                        className={this.props.showAlert ? "inputField border-1 border-accent" : "inputField"}
+                        className={"inputField w-full " + (this.props.showAlert ? "border-1 border-accent" : "")}
                         type="number"
-                        min={this.props.min}
-                        max={this.props.max}
                         step={this.props.step}
                         placeholder={this.props.placeholder}
                         id={this.props.id}
@@ -36,6 +34,6 @@ class IntSelectorField extends Component {
     }
 }
 
-const MySection = handleViewport(IntSelectorField, { rootMargin: "-1.0px" })
+const MySection = handleViewport(YearSelectorField, { rootMargin: "-1.0px" })
 
 export default MySection

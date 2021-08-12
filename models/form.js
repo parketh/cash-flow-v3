@@ -33,6 +33,10 @@ const formSchema = new mongoose.Schema({
     useCiqForecast: String,
     forecastStart: Number,
     forecastEnd: Number,
+    forecastRevGrowth: {
+        type: Map,
+        of: Number,
+    },
     g: Number,
     discRateApproach: String,
     rf: Number,

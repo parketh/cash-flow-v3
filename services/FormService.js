@@ -3,7 +3,7 @@ import axios from "axios"
 const dev = process.env.NODE_ENV !== "production"
 
 const url = dev ? "http://localhost:3001" : ""
-const formID = "611267fd5e69bc8134736cbf"
+const formID = "61151be57473a6fd0499dc76"
 
 const retrieveForm = () => {
     return axios.get(`${url}/api/forms/${formID}`).then((response) => response.data)
@@ -11,22 +11,6 @@ const retrieveForm = () => {
 
 const updateForm = (updatedForm) => {
     return axios.put(`${url}/api/forms/${formID}`, updatedForm).then((response) => response.data)
-}
-
-const getCompanies = () => {
-    return axios.get(`${url}/api/forms/${formID}/comps`).then((response) => response.data)
-}
-
-const createCompany = (companyObject) => {
-    return axios.post(`${url}/api/forms/${formID}/comps`, companyObject).then((response) => response.data)
-}
-
-const updateCompany = (id, companyObject) => {
-    return axios.put(`${url}/api/forms/${formID}/comps/${id}`, companyObject).then((response) => response.data)
-}
-
-const removeCompany = (id) => {
-    return axios.delete(`${url}/api/forms/${formID}/comps/${id}`)
 }
 
 const downloadFile = () => {
@@ -63,10 +47,6 @@ const getPages = (slug) => {
 const exportedServices = {
     retrieveForm,
     updateForm,
-    getCompanies,
-    createCompany,
-    updateCompany,
-    removeCompany,
     downloadFile,
     submitFeedback,
     getPages,

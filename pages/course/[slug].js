@@ -4,7 +4,6 @@ import ReactMarkdown from "react-markdown"
 import Link from "next/link"
 import gfm from "remark-gfm"
 
-import DefaultLayout from "@Layouts/DefaultLayout"
 import FormService from "~/services/FormService"
 import letterToNum from "~/utils/letterToNum"
 import numToLetter from "~/utils/numToLetter"

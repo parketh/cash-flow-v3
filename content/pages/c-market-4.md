@@ -1,16 +1,13 @@
 ### **Element 1: What market or markets does the company operate in?**
 
-Spotify's financial statements are 233 pages long! To find the bit on industry and geographic segments, let's:
+Spotify's annual report runs to 233 pages! We need to be really selective in order to find the information we need.
 
-1. **Look for the financial statements**
-    1. According to the table of contents on page i, it's on page 96.
-    2. The bit at the top of page 96 says that the financial statements are at page F-1...okay, let's follow the trail. 
-    3. Page F-1 shows an index of the different parts of the financial statements. The one we want is the statement of comprehensive (loss)/income, located on page F-5. In other countries, this might simply be called an income statement. 
-2. **Find the line that says 'Revenue', and look for the corresponding note**
-    1. 'Revenue' is the first line in the income statement. It has an annotation linking to Note 4. Let's check out Note 4. If we go back to the index on page 96, we can see that the notes to the financial statements start at page F-10.  Keep scrolling down until we get to Note 4 on page F-22.
-    2. Note 4 says, "*The Group discloses revenue by reportable segment and geographic area in Note 6*". Let's follow the trail again...
-    3. Finally, we get to what we are looking for at Note 6, on page F-25.
+The section we are looking for contains a breakdown of Spotify's market segments. This is often organised by industry, geography or both, and is normally found in the notes to the financial statements. Before continuing, let's quickly recap what financial statements are.
 
-Finding this one item was super complicated, but that's a pretty common search process for digging out information in financial statements. 
+Financial statements are a formal record of the financial activities and position of a company. It typically comprises three statements (presented as tables), including:
 
-You'll get better as you do this more and familiarise yourself with the layout of the annual report. You might even discover your own shortcuts!
+1. the **Income Statement** (also known as the _Statement of Operations, the Profit and Loss Statement, the Statement of Financial Results, or the Statement of Earnings_): this is a record of the accounting revenues and costs of a company. It paints a picture of the company's performance over the financial period.
+2. the **Balance Sheet** (also known as the _Statement of Financial Position_): this is a record of the stock of assets and liabilities held by the company at the end of the financial period. It is a point-in-time snapshot of the business, unlike the Income Statement which records flows over the period.
+3. the **Cash Flow Statement** (or _Statement of Cash Flows_): this records all in-flows and out-flows of cash into the business. It differs from the Income Statement in two ways: firstly, it records cash flows rather than accounting revenues and costs, and secondly, it is organised by type of cash flow rather than by revenues and costs.
+
+While the three statements are very useful, they abstract away a lot of the detail that is important for building the narrative of a business. This detail can be found in the Notes to the financial statements, which are usually located directly after the three statements.

@@ -33,8 +33,8 @@ const DownloadSection = ({ allowDL }) => {
         return (
             <>
                 <SectionHeader title="DOWNLOAD" subtitle="Download your valuation model" />
-                <div className="sectionHeader">
-                    <div className="font-medium text-gray-500">
+                <div className="sectionHeader mb-24">
+                    <div className="mb-8 font-medium text-gray-500">
                         <span>
                             Whoops! It looks like you either haven't finished configuring your model, or you've just
                             refreshed your page. Please return to the

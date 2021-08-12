@@ -1,12 +1,12 @@
 const forecastSources = [
     {
         value: 1,
-        label: "Analyst forecasts (if provided by Capital IQ)"
+        label: "Yes",
     },
     {
         value: 2,
-        label: "Specify own forecast"
-    }
+        label: "No",
+    },
 ]
 
 export default forecastSources

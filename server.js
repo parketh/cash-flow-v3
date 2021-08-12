@@ -2,7 +2,6 @@ require("dotenv").config()
 const express = require("express")
 const next = require("next")
 const cors = require("cors")
-const fs = require("fs")
 
 const {
     loginRouter,

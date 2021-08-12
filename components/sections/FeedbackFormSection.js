@@ -65,12 +65,8 @@ const FeedbackFormSection = () => {
                 <Text>
                     <span>
                         Please consider leaving some feedback, which will help me to continue improving the tool. You
-                        can do so by sending me an email at{" "}
+                        can do so by filling out the form below.
                     </span>
-                    <a className="text-theme" href="mailto:yeungparkhay@gmail.com">
-                        yeungparkhay@gmail.com
-                    </a>
-                    <span> or via the form below.</span>
                 </Text>
                 {
                     <TextField

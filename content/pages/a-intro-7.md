@@ -1,5 +1,5 @@
-Valuing a business is a lot like telling a good story. There are seven elements of this particular story we will keep coming back to, and as I'm a fan of stating conclusions upfront, here they all are in order:
+### **Element 6. &nbsp; What are the key risks to the business?**
 
-### **Element 7. &nbsp; How is the business financed?** 
+Risky businesses are worth less than stable businesses. Uncertainty in the profile of a company's cash flows must be factored into the cash flows of a company by way of the discounting, or reduction, of its cash flows.
 
-Finally, how is the business financed? You may have heard of debt and equity financing, but what do they actually mean in the context of valuing a company?
+Risk, and how it is taken into account, is often misunderstood. We will break this down by looking at different types of risks and explaining how they should most appropriately by factored into a company's cash flows.

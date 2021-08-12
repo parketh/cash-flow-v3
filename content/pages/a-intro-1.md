@@ -1,5 +1,9 @@
-Valuing a business is a lot like telling a good story. There are seven elements of this particular story we will keep coming back to, and as I'm a fan of stating conclusions upfront, here they all are in order:
+Yuval Noah Harari wrote in his best-selling memoir of our species, Sapiens, that what seperates humans from animals is our ability to devise _narratives_.
 
-### **Element 1. &nbsp; What market or markets does the company operate in?** 
-   
-One of the first things we should do in order to better understand a company is define the market(s) in which it operates. A company like Coca Cola has a rather well-defined market, but a company like Google is far more complex - it operates in online search, advertising, cloud computing, amongst other sectors. The market(s) in which a company operates can be an important indicator of its profitability and prospects for growth.
+Stories have shaped the course of human history—explaining the spread of religion, the rise and fall of political leaders, and indeed, the creation of today's businesses.
+
+In this course, we will learn that valuing a company, too, requires the telling of a good story. Without a narrative to bind it all together, our model of a company's finances amounts to no more than a meaningless collection of numbers.
+
+Narratives give our valuation meaning. We will be taking a detailed look at how each element of our narrative affects a particular assumption in our model, and the importance of adhering to this framework.
+
+Let's begin!

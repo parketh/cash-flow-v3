@@ -1,11 +1,29 @@
 module.exports = {
     mode: "jit",
-    purge: [
-        "./pages/**/*.{js,ts,jsx,tsx}",
-        "./components/**/*.{js,ts,jsx,tsx}",
-        "./data/**/*.{js,ts,jsx,tsx}",
-        "./services/**/*.{js,ts,jsx,tsx}",
-    ],
+    purge: {
+        content: [
+            "./pages/**/*.{js,ts,jsx,tsx}",
+            "./components/**/*.{js,ts,jsx,tsx}",
+            "./data/**/*.{js,ts,jsx,tsx}",
+            "./services/**/*.{js,ts,jsx,tsx}",
+        ],
+        safelist: [
+            "grid-cols-1",
+            "grid-cols-2",
+            "grid-cols-3",
+            "grid-cols-4",
+            "grid-cols-5",
+            "grid-cols-6",
+            "grid-cols-7",
+            "sm:grid-cols-1",
+            "sm:grid-cols-2",
+            "sm:grid-cols-3",
+            "sm:grid-cols-4",
+            "sm:grid-cols-5",
+            "sm:grid-cols-6",
+            "sm:grid-cols-7",
+        ],
+    },
     darkMode: false, // or 'media' or 'class'
     theme: {
         extend: {
@@ -47,6 +65,7 @@ module.exports = {
                 768: "48rem",
             },
             spacing: {
+                960: "60rem",
                 768: "48rem",
                 496: "31rem",
                 400: "25rem",

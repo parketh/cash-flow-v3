@@ -1,18 +1,20 @@
 import SectionHeader from "@Elements/SectionHeader"
+import Footnote from "@Elements/Footnote"
 
 import DropDownField from "@Modules/DropDownField"
-import IntSelectorField from "@Modules/IntSelectorField"
-
+import YearSelectorField from "@Modules/YearSelectorField"
+import PercentageSelectorField from "@Modules/PercentageSelectorField"
+import TimeSeriesField from "@Modules/TimeSeriesField"
 import ForecastSources from "@FormOptions/ForecastSources"
 
-const ForecastFinancialFormSection = ({ responses, alerts, handleResponseChange }) => {
+const ForecastFinancialFormSection = ({ responses, alerts, handleResponseChange, handleResponseChangeNested }) => {
     return (
         <>
             {<SectionHeader title="FINANCIAL DATA" subtitle="Forecast" />}
             <div className="sectionHeader">
                 {
                     <DropDownField
-                        label="Source of forecasts"
+                        label="Use Capital IQ forecasts where available"
                         options={ForecastSources}
                         id="useCiqForecast"
                         response={responses.useCiqForecast}
@@ -20,13 +22,12 @@ const ForecastFinancialFormSection = ({ responses, alerts, handleResponseChange 
                         showAlert={alerts.useCiqForecast}
                     />
                 }
+                <Footnote text="Caution: Changing the forecast period will update all of the forecasting assumptions and may cause loss of unsaved data." />
                 {
-                    <IntSelectorField
+                    <YearSelectorField
                         label="Forecast period start (YYYY)"
                         placeholder="e.g. 2018"
                         step="1"
-                        min="2000"
-                        max="2021"
                         id="forecastStart"
                         response={responses.forecastStart}
                         handleResponseChange={handleResponseChange}
@@ -34,25 +35,32 @@ const ForecastFinancialFormSection = ({ responses, alerts, handleResponseChange 
                     />
                 }
                 {
-                    <IntSelectorField
+                    <YearSelectorField
                         label="Forecast period end (YYYY)"
                         placeholder="e.g. 2021"
                         step="1"
-                        min="2000"
-                        max="2100"
                         id="forecastEnd"
                         response={responses.forecastEnd}
                         handleResponseChange={handleResponseChange}
                         showAlert={alerts.forecastEnd}
                     />
                 }
+                <TimeSeriesField
+                    label="Revenue growth rate (%)"
+                    start={responses.forecastStart}
+                    end={responses.forecastEnd}
+                    placeholder="0"
+                    step="1"
+                    id="forecastRevGrowth"
+                    response={responses.forecastRevGrowth}
+                    handleResponseChangeNested={handleResponseChangeNested}
+                    showAlert={alerts.forecastRevGrowth}
+                />
                 {
-                    <IntSelectorField
+                    <PercentageSelectorField
                         label="Terminal growth rate (%)"
                         placeholder="2"
                         step="0.01"
-                        min="0.1"
-                        max="10"
                         id="g"
                         response={responses.g}
                         handleResponseChange={handleResponseChange}

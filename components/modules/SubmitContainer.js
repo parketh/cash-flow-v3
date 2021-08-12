@@ -56,7 +56,7 @@ const SubmitContainer = ({ responses, setResponses, setSampleValues, clearForm, 
                     onClick={clearForm}
                     value="Clear settings"
                     wrapperStyle="w-48 md:w-48 h-10 mt-2"
-                    buttonStyle="h-full w-full rounded font-semibold border-1 border-opacity-30	 border-accent text-accent hover:bg-accent-lighter active:bg-accent-light text-center"
+                    buttonStyle="h-full w-full rounded font-semibold border-1 border-opacity-30	border-accent text-accent hover:bg-accent-lighter active:bg-accent-light text-center"
                 />
                 <div className="inline">
                     <ButtonReactive onClick={submitForm} saveButtonStatus={saveButtonStatus} />

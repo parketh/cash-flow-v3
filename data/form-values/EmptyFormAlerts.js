@@ -13,6 +13,7 @@ const emptyAlerts = {
     useCiqForecast: false,
     forecastStart: false,
     forecastEnd: false,
+    forecastRevGrowth: {},
     g: false,
     discRateApproach: false,
     rf: false,

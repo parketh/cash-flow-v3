@@ -1,5 +1,5 @@
-Valuing a business is a lot like telling a good story. There are seven elements of this particular story we will keep coming back to, and as I'm a fan of stating conclusions upfront, here they all are in order:
+### **Element 5. &nbsp; What stage of growth is the company undergoing?**
 
-### **Element 6. &nbsp; What are the key risks to the business?**
+The market in which a company operates can tell us a lot about its growth prospects, but sometimes there are significant differences between companies operating in the same sector. We need to understand whether a company is a start-up, an growth-stage company, a mature company, or a company in decline.
 
-Uncertainty in the profile of a company's cash flows must be factored into the discount rate that one applies when assessing the value of a company. Risk, and how it is factored into modelling, is often misunderstood and we will break this down in more detail. 
+The expected trajectory of a company's future growth can affect both the length of our forecasts and our assumptions regarding its financial performance.

@@ -13,8 +13,22 @@
     @apply text-lg mb-8 font-medium text-gray-500;
 }
 
+.bodyTextSmall {
+    @apply mb-8 font-medium text-gray-500;
+}
+
 .bodyTextTutorial {
-    @apply text-lg font-medium mb-8 leading-relaxed text-gray-500;
+    @apply text-base font-medium mb-8 leading-relaxed text-gray-500;
+}
+
+.textLink {
+    @apply text-theme hover:text-theme-medium cursor-pointer;
 }
 
 @tailwind utilities;
+
+input.percentValue[type="number"]::-webkit-inner-spin-button,
+input.percentValue[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

@@ -1,7 +1,5 @@
 import React, { useState } from "react"
 
-import FormService from "~/services/FormService"
-
 import Button from "@Elements/Button"
 import ConfirmationIndicator from "@Elements/ConfirmationIndicator"
 import FieldLabel from "@Elements/FieldLabel"
@@ -41,13 +39,13 @@ const AddComparables = ({ responses, setResponses }) => {
     const handleAlerts = () => {
         let returnValue = true
         let newAlerts = JSON.parse(JSON.stringify(alerts))
-        if (newComp === "" || newComp === null) {
+        if (String(newComp).trim() === "" || String(newComp).trim() === null) {
             newAlerts.addCompany = true
             returnValue = false
         } else {
             newAlerts.addCompany = false
         }
-        if (newCompCiq === "" || newCompCiq === null) {
+        if (String(newCompCiq).trim() === "" || String(newCompCiq).trim() === null) {
             newAlerts.addCiqTicker = true
             returnValue = false
         } else {
@@ -64,15 +62,19 @@ const AddComparables = ({ responses, setResponses }) => {
             const newEntry = { name: newComp, ciqId: newCompCiq }
             if (responses.comps.filter((comp) => comp.name === newComp).length > 0) {
                 if (window.confirm(`${newComp} already exists. Update with new Capital IQ ticker?`)) {
-                    FormService.updateCompany(
-                        responses.comps.filter((comp) => comp.name === newComp)[0].id,
-                        newEntry
-                    ).then((returnedComps) => setResponses({ ...responses, comps: returnedComps }))
+                    setResponses({
+                        ...responses,
+                        comps: responses.comps.map((comp) => {
+                            if (comp.name === newComp) return newEntry
+                            else return comp
+                        }),
+                    })
                 }
             } else {
-                FormService.createCompany(newEntry).then((returnedComps) =>
-                    setResponses({ ...responses, comps: returnedComps })
-                )
+                setResponses({
+                    ...responses,
+                    comps: [...responses.comps, newEntry],
+                })
             }
             setNewComp("")
             setNewCompCiq("")

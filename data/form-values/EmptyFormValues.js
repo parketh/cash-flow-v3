@@ -13,6 +13,7 @@ const EmptyFormValues = {
     useCiqForecast: "",
     forecastStart: "",
     forecastEnd: "",
+    forecastRevGrowth: {},
     g: "",
     discRateApproach: "",
     rf: "",

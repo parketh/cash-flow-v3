@@ -1,5 +1,5 @@
-Valuing a business is a lot like telling a good story. There are seven elements of this particular story we will keep coming back to, and as I'm a fan of stating conclusions upfront, here they all are in order:
+### **Element 4. &nbsp; What are the company's costs, and how are they structured?**
 
-### **Element 5. &nbsp; What stage of growth is the company going through?** 
+The cash that a company generates is not just what they bring in, but what they have left over after paying the costs of running a business. The structure of a business's fixed and variable costs can have important implications for the variability of its financial performance (i.e. its risk), and therefore how it finances its business.
 
-Is the company a start-up, an early-stage growth company, a mature company, or a company in decline? The expected profile of a company's future growth determines the forecast horizon we should use and how we forecast financial performance.
+Companies that have lower costs relative to their revenues are more valuable than companies with higher costs. One way to assess the amount of cash that a company is able to retain is by looking at profit margins. Profit margins are often also the best starting point for forecasting cash costs.

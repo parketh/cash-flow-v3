@@ -17,32 +17,95 @@ import DefaultLayout from "@Layouts/DefaultLayout"
 import EmptyFormAlerts from "@FormValues/EmptyFormAlerts"
 import SampleFormValues from "@FormValues/SampleFormValues"
 import EmptyFormValues from "@FormValues/EmptyFormValues"
+import FormValueRanges from "@FormValues/FormValueRanges"
+
+import range from "@Utils/range"
 
 const Configuration = () => {
     const [responses, setResponses] = useState([])
     const [alerts, setAlerts] = useState(EmptyFormAlerts)
-    const [isFormComplete, setIsFormComplete] = useState(false)
 
     // Retrieve existing state of form from server on page load
     useEffect(() => {
         FormService.retrieveForm()
             .then((initialResponses) => {
                 setResponses(initialResponses)
-                validateForm()
+                let emptyAlerts = lodash.cloneDeep(initialResponses)
+                emptyAlerts = lodash.mapValues(emptyAlerts, (value) => {
+                    if (typeof value === "object" && value !== null) {
+                        return lodash.mapValues(value, () => false)
+                    } else {
+                        return false
+                    }
+                })
+                emptyAlerts["comps"] = false
+                setAlerts(emptyAlerts)
             })
             .then(() => {
-                if (isFormComplete) {
-                    // TO DO - Set allow downloads to true
-                } else {
-                    // TO DO - Set allow downloads to false
-                }
+                // if () {
+                //     // TO DO - Set allow downloads to true
+                // } else {
+                //     // TO DO - Set allow downloads to false
+                // }
             })
     }, [])
 
     // Handle changes to form responses by updating state and cancelling active alerts
     const handleResponseChange = (event) => {
-        setResponses({ ...responses, [event.target.id]: event.target.value })
+        const value = FormValueRanges[event.target.id]
+            ? Math.min(
+                  Math.max(event.target.value, FormValueRanges[event.target.id].min),
+                  FormValueRanges[event.target.id].max
+              )
+            : event.target.value
+
+        if (event.target.id === "forecastStart" || event.target.id === "forecastEnd") {
+            const forecastStart =
+                event.target.id === "forecastStart" ? Number(event.target.value) : Number(responses["forecastStart"])
+            const forecastEnd =
+                event.target.id === "forecastEnd" ? Number(event.target.value) : Number(responses["forecastEnd"])
+
+            let forecastRevGrowth = lodash.cloneDeep(responses["forecastRevGrowth"])
+            for (const [key, value] of Object.entries(forecastRevGrowth)) {
+                if (Number(key) < forecastStart || Number(key) > forecastEnd) {
+                    delete forecastRevGrowth[key]
+                }
+            }
+            range(forecastStart, forecastEnd + 1).map((year) => {
+                if (!(year in responses["forecastRevGrowth"])) {
+                    forecastRevGrowth[year] = ""
+                }
+            })
+            setResponses({
+                ...responses,
+                forecastRevGrowth: forecastRevGrowth,
+                [event.target.id]: value,
+            })
+        } else {
+            setResponses({
+                ...responses,
+                [event.target.id]: value,
+            })
+        }
+
         setAlerts({ ...alerts, [event.target.id]: false })
+    }
+
+    const handleResponseChangeNested = (event) => {
+        setResponses({
+            ...responses,
+            [event.target.id]: {
+                ...responses[event.target.id],
+                [event.target.alt]: event.target.value,
+            },
+        })
+        setAlerts({
+            ...alerts,
+            [event.target.id]: {
+                ...alerts[event.target.id],
+                [event.target.alt]: false,
+            },
+        })
     }
 
     // Overwrite form with sample values
@@ -67,8 +130,21 @@ const Configuration = () => {
         let newAlerts = lodash.cloneDeep(alerts)
 
         Object.entries(responses).forEach(([key, value]) => {
-            if (key !== "comps" && key !== "rOverride" && key !== "rf" && key !== "preTaxRd" && key !== "erp") {
-                if (value === "" || value === null || value === undefined) {
+            if (key === "forecastRevGrowth") {
+                Object.entries(responses[key]).forEach(([yearKey, yearValue]) => {
+                    if (yearValue === "" || yearValue === null || yearValue === undefined) {
+                        newAlerts[key][yearKey] = true
+                        isValid = false
+                    } else {
+                        newAlerts[key][yearKey] = false
+                    }
+                })
+            } else if (key !== "comps" && key !== "rOverride" && key !== "rf" && key !== "preTaxRd" && key !== "erp") {
+                if (
+                    String(value).trim() === "" ||
+                    String(value).trim() === null ||
+                    String(value).trim() === undefined
+                ) {
                     newAlerts[key] = true
                     isValid = false
                 } else {
@@ -100,7 +176,6 @@ const Configuration = () => {
         })
 
         setAlerts(newAlerts)
-        setIsFormComplete(isValid)
 
         return isValid
     }
@@ -123,6 +198,7 @@ const Configuration = () => {
                         responses={responses}
                         alerts={alerts}
                         handleResponseChange={handleResponseChange}
+                        handleResponseChangeNested={handleResponseChangeNested}
                     />
                     <DiscountRateFormSection
                         responses={responses}
@@ -144,7 +220,6 @@ const Configuration = () => {
                 setSampleValues={setSampleValues}
                 clearForm={clearForm}
                 validateForm={validateForm}
-                isFormComplete={isFormComplete}
             />
         </>
     )

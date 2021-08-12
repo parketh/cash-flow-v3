@@ -2,8 +2,7 @@ import SectionHeader from "@Elements/SectionHeader"
 import Footnote from "@Elements/Footnote"
 
 import DropDownFieldWithLabel from "@Modules/DropDownFieldWithLabel"
-import IntSelectorField from "@Modules/IntSelectorField"
-
+import PercentageSelectorField from "@Modules/PercentageSelectorField"
 import DiscRateApproaches from "@FormOptions/DiscRateApproaches"
 
 const DiscountRateFormSection = ({ responses, alerts, handleResponseChange }) => {
@@ -23,7 +22,7 @@ const DiscountRateFormSection = ({ responses, alerts, handleResponseChange }) =>
                     />
                 }
                 {
-                    <IntSelectorField
+                    <PercentageSelectorField
                         label="Risk free rate (%)"
                         placeholder="2"
                         step="0.1"
@@ -36,7 +35,7 @@ const DiscountRateFormSection = ({ responses, alerts, handleResponseChange }) =>
                     />
                 }
                 {
-                    <IntSelectorField
+                    <PercentageSelectorField
                         label="Equity risk premium (%)"
                         placeholder="5.5"
                         step="0.1"
@@ -49,7 +48,7 @@ const DiscountRateFormSection = ({ responses, alerts, handleResponseChange }) =>
                     />
                 }
                 {
-                    <IntSelectorField
+                    <PercentageSelectorField
                         label="(Pre-tax) Cost of debt (%)"
                         placeholder="5"
                         step="0.1"
@@ -62,7 +61,7 @@ const DiscountRateFormSection = ({ responses, alerts, handleResponseChange }) =>
                     />
                 }
                 {
-                    <IntSelectorField
+                    <PercentageSelectorField
                         label="Debt ratio (%)"
                         placeholder="40"
                         step="0.1"
@@ -75,7 +74,7 @@ const DiscountRateFormSection = ({ responses, alerts, handleResponseChange }) =>
                     />
                 }
                 {
-                    <IntSelectorField
+                    <PercentageSelectorField
                         label="Tax rate (%)"
                         placeholder="20"
                         step="0.1"
@@ -92,7 +91,7 @@ const DiscountRateFormSection = ({ responses, alerts, handleResponseChange }) =>
                     showAlert={alerts.t}
                 />
                 {
-                    <IntSelectorField
+                    <PercentageSelectorField
                         label="Discount rate (%) - override"
                         step="0.1"
                         min="0"
