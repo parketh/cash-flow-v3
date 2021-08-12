@@ -68,6 +68,6 @@ schemas.forEach((s) => {
 })
 
 module.exports = {
-    Form: mongoose.model("Form", formSchema),
-    Comp: mongoose.model("Comp", compSchema),
+    Form: mongoose.models.Form || mongoose.model("Form", formSchema),
+    Comp: mongoose.models.Comp || mongoose.model("Comp", compSchema),
 }

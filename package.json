@@ -5,7 +5,11 @@
         "build": "next build",
         "start": "NODE_ENV=production node server.js",
         "lint": "next lint",
-        "export": "NODE_ENV=production next build && next export -o build"
+        "export": "NODE_ENV=production next build && next export -o build",
+        "dev2": "next dev",
+        "build2": "next build",
+        "start2": "next start",
+        "lint2": "next lint"
     },
     "dependencies": {
         "@tailwindcss/typography": "^0.4.1",

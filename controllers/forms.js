@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken")
 
 const formsRouter = require("express").Router()
-const { Form, Comp } = require("../models/form")
+const { Form } = require("../models/form")
 const User = require("../models/user")
 
 const getTokenFrom = (request) => {
