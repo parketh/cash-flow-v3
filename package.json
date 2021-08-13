@@ -9,7 +9,8 @@
         "dev2": "next dev",
         "build2": "next build",
         "start2": "NODE_ENV=production next start",
-        "lint2": "next lint"
+        "lint2": "next lint",
+        "export": "next export -o build"
     },
     "dependencies": {
         "@tailwindcss/typography": "^0.4.1",
