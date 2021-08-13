@@ -2,6 +2,7 @@ const XlsxPopulate = require("xlsx-populate")
 const XLSX = require("xlsx")
 const lodash = require("lodash")
 const moment = require("moment")
+const fs = require("fs")
 
 const generateModel = (res, readFile, writeFile, response, request) => {
     let responses = res[0]
@@ -322,7 +323,9 @@ const generateModel = (res, readFile, writeFile, response, request) => {
         ------------------------------------------------------  */
 
     // Map years to dates for each of the specified variables
-    const forecastPeriods = responses.forecastEnd - responses.forecastStart
+    const forecastPeriods = responses.forecastEnd - responses.forecastStart + 1
+    const forecastStartYear = lodash.cloneDeep(responses.forecastStart)
+    const forecastEndYear = lodash.cloneDeep(responses.forecastEnd)
     const periodNames = ["histStart", "histEnd", "forecastStart", "forecastEnd"]
     periodNames.forEach((name) => {
         let newDate = moment(responses["finYearEnd"]).toDate()
@@ -361,6 +364,7 @@ const generateModel = (res, readFile, writeFile, response, request) => {
     XlsxPopulate.fromFileAsync(readFile)
         .then((workbook) => {
             // Populate sheet headers and model inputs
+
             const today = new Date().toJSON().slice(0, 10).replace(/-/g, "-")
 
             workbook.sheets().forEach((sheet) => {
@@ -412,16 +416,7 @@ const generateModel = (res, readFile, writeFile, response, request) => {
             if (forecastPeriods > 3) {
                 for (let i = 0; i < forecastPeriods - 3; i++) {
                     dcfArray = updateSheet(workbook, "DCF", 8, 22, 1, 0, i, dcfArray)
-                    forecastArray = updateSheet(
-                        workbook,
-                        "Forecasts",
-                        8,
-                        1,
-                        (dispCol = 1),
-                        (dispRow = 0),
-                        i,
-                        forecastArray
-                    )
+                    forecastArray = updateSheet(workbook, "Forecasts", 8, 1, 1, 0, i, forecastArray)
                     ISArray = updateSheet(workbook, "IS", 8, 6, 1, 0, i, ISArray)
                     BSArray = updateSheet(workbook, "BS", 8, 6, 1, 0, i, BSArray)
                     CFSArray = updateSheet(workbook, "CFS", 8, 6, 1, 0, i, CFSArray)
@@ -468,14 +463,45 @@ const generateModel = (res, readFile, writeFile, response, request) => {
 
             console.log("Added comparable companies")
 
+            // Added forecasts
+
+            const forecastVariables = [
+                "forecastRevGrowth",
+                "forecastCogsPct",
+                "forecastVarOpCostPct",
+                "forecastFixedOpCost",
+                "forecastDeprPct",
+                "forecastCapexPct",
+                "forecastWorkingCapPct",
+            ]
+
+            for (let i = 0; i < forecastVariables.length; i++) {
+                for (let j = 0; j < Number(forecastEndYear) - Number(forecastStartYear) + 1; j++) {
+                    workbook
+                        .sheet("Forecasts")
+                        .column(5 + j)
+                        .cell(69 + i)
+                        .value(
+                            Number(
+                                JSON.parse(JSON.stringify(responses[forecastVariables[i]]))[
+                                    String(j + Number(forecastStartYear))
+                                ]
+                            ) / (forecastVariables[i] === "forecastFixedOpCost" ? 1 : 100)
+                        )
+                }
+            }
+
+            console.log("Added forecasts")
+
             console.log("Saving workbook")
-            return workbook.toFileAsync(writeFile).then(() => {
-                response.send(writeFile, `${request.query.id}.xlsx`, (err) => {
-                    if (err) {
-                        response.status(500).send({
-                            message: "Could not download the file. " + err,
-                        })
-                    }
+            return workbook.toFileAsync(writeFile).then(async () => {
+                response.setHeader("Content-Disposition", "attachment; filename=dcf_model.xlsx")
+                response.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                const downloadStream = fs.createReadStream(writeFile)
+                // We replaced all the event handlers with a simple call to downloadStream.pipe()
+                await new Promise(function (resolve) {
+                    downloadStream.pipe(response)
+                    downloadStream.on("end", resolve)
                 })
             })
         })

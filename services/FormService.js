@@ -3,10 +3,8 @@ import axios from "axios"
 // const dev = true
 const dev = process.env.NODE_ENV === "development"
 
-console.log("Development? " + dev)
-
 const url = dev ? "http://localhost:3000" : ""
-const formID = "61151be57473a6fd0499dc76"
+const formID = "611684e06d925e1ce0b0c9df"
 
 const retrieveForm = () => {
     return axios.get(`${url}/api/forms/${formID}`).then((response) => response.data)

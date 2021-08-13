@@ -1,25 +1,24 @@
-const path = require("path")
+const CopyPlugin = require("copy-webpack-plugin")
 
 module.exports = {
-    webpack: (config) => {
+    target: "serverless",
+    webpack: (config, { dev, isServer }) => {
         config.module.rules.push({
             test: /\.md$/,
             use: "raw-loader",
         })
-        // config.resolve.alias = {
-        //     ...config.resolve.alias,
-        //     "@Elements": path.resolve(__dirname, "components/elements"),
-        //     "@Modules": path.resolve(__dirname, "components/modules"),
-        //     "@Sections": path.resolve(__dirname, "components/sections"),
-        //     "@Layouts": path.resolve(__dirname, "components/layouts"),
-        //     "@Utils": path.resolve(__dirname, "utils"),
-        //     "@FormOptions": path.resolve(__dirname, "data/form-options"),
-        //     "@FormValues": path.resolve(__dirname, "data/form-values"),
-        //     "@CourseIndex": path.resolve(__dirname, "data/course-index"),
-        //     "@Models": path.resolve(__dirname, "models"),
-        //     "@Services": path.resolve(__dirname, "services"),
-        //     "~": path.resolve(__dirname),
-        // }
+        // Fixes npm packages that depend on `fs` module
+        if (!isServer) {
+            config.resolve.fallback.fs = false
+        }
+        // copy files you're interested in
+        if (!dev) {
+            config.plugins.push(
+                new CopyPlugin({
+                    patterns: [{ from: "content", to: "content" }],
+                })
+            )
+        }
         return config
     },
     eslint: {

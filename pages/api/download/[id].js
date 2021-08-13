@@ -1,7 +1,7 @@
 import { Form } from "@Models/form"
 import { existsSync, unlinkSync } from "fs"
+import { tmpdir } from "os"
 import path from "path"
-import getConfig from "next/config"
 
 import generateModel from "~/services/generateModel"
 
@@ -12,9 +12,15 @@ const downloadHandler = (request, response) => {
     } = request
 
     if (method === "GET") {
-        response.setHeader("content-type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-        const readFile = path.join(getConfig().serverRuntimeConfig.PROJECT_ROOT, "static/dcf_model_blank.xlsx")
-        const writeFile = path.join(getConfig().serverRuntimeConfig.PROJECT_ROOT, `downloads/${id}.xlsx`)
+        let basePath = process.cwd()
+        if (process.env.NODE_ENV === "production") {
+            basePath = path.join(process.cwd(), ".next/server/chunks")
+        }
+        const readFile = path.join(basePath, "content/dcf_model_blank.xlsx")
+        const writeFile =
+            process.env.NODE_ENV === "production"
+                ? path.join(tmpdir(), `${id}.xlsx`)
+                : path.join(basePath, `downloads/${id}.xlsx`)
 
         if (existsSync(writeFile)) {
             try {

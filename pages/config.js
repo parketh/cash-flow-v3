@@ -25,6 +25,16 @@ const Configuration = () => {
     const [responses, setResponses] = useState([])
     const [alerts, setAlerts] = useState(EmptyFormAlerts)
 
+    const timeSeriesValues = [
+        "forecastRevGrowth",
+        "forecastCogsPct",
+        "forecastVarOpCostPct",
+        "forecastFixedOpCost",
+        "forecastDeprPct",
+        "forecastCapexPct",
+        "forecastWorkingCapPct",
+    ]
+
     // Retrieve existing state of form from server on page load
     useEffect(() => {
         FormService.retrieveForm()
@@ -59,33 +69,41 @@ const Configuration = () => {
               )
             : event.target.value
 
-        if (event.target.id === "forecastStart" || event.target.id === "forecastEnd") {
-            const forecastStart =
-                event.target.id === "forecastStart" ? Number(event.target.value) : Number(responses["forecastStart"])
-            const forecastEnd =
-                event.target.id === "forecastEnd" ? Number(event.target.value) : Number(responses["forecastEnd"])
+        switch (event.target.id) {
+            case "forecastStart":
+            case "forecastEnd":
+                const forecastStart =
+                    event.target.id === "forecastStart"
+                        ? Number(event.target.value)
+                        : Number(responses["forecastStart"])
+                const forecastEnd =
+                    event.target.id === "forecastEnd" ? Number(event.target.value) : Number(responses["forecastEnd"])
 
-            let forecastRevGrowth = lodash.cloneDeep(responses["forecastRevGrowth"])
-            for (const [key, value] of Object.entries(forecastRevGrowth)) {
-                if (Number(key) < forecastStart || Number(key) > forecastEnd) {
-                    delete forecastRevGrowth[key]
-                }
-            }
-            range(forecastStart, forecastEnd + 1).map((year) => {
-                if (!(year in responses["forecastRevGrowth"])) {
-                    forecastRevGrowth[year] = ""
-                }
-            })
-            setResponses({
-                ...responses,
-                forecastRevGrowth: forecastRevGrowth,
-                [event.target.id]: value,
-            })
-        } else {
-            setResponses({
-                ...responses,
-                [event.target.id]: value,
-            })
+                let deepCopy = lodash.cloneDeep(responses)
+
+                timeSeriesValues.forEach((variable) => {
+                    for (const [key, value] of Object.entries(deepCopy[variable])) {
+                        if (Number(key) < forecastStart || Number(key) > forecastEnd) {
+                            delete deepCopy[variable][key]
+                            console.log(deepCopy)
+                        }
+                    }
+                    range(forecastStart, forecastEnd + 1).map((year) => {
+                        if (!(year in responses[variable])) {
+                            deepCopy[variable][year] = ""
+                        }
+                    })
+                    setResponses({
+                        ...deepCopy,
+                        [event.target.id]: value,
+                    })
+                })
+                break
+            default:
+                setResponses({
+                    ...responses,
+                    [event.target.id]: value,
+                })
         }
 
         setAlerts({ ...alerts, [event.target.id]: false })
@@ -130,7 +148,7 @@ const Configuration = () => {
         let newAlerts = lodash.cloneDeep(alerts)
 
         Object.entries(responses).forEach(([key, value]) => {
-            if (key === "forecastRevGrowth") {
+            if (timeSeriesValues.includes(key)) {
                 Object.entries(responses[key]).forEach(([yearKey, yearValue]) => {
                     if (yearValue === "" || yearValue === null || yearValue === undefined) {
                         newAlerts[key][yearKey] = true

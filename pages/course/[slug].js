@@ -49,7 +49,7 @@ export async function getStaticProps({ params }) {
 
     // Import our .md file using the `slug` from the URL
     const content = await fs.readFileSync(
-        path.join(getConfig().serverRuntimeConfig.PROJECT_ROOT, `static/coursepages/${slug}.md`),
+        path.join(getConfig().serverRuntimeConfig.PROJECT_ROOT, `public/coursepages/${slug}.md`),
         "utf8"
     )
 

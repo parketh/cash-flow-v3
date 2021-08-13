@@ -38,3 +38,9 @@ const formHandler = (request, response) => {
 }
 
 export default formHandler
+
+export const config = {
+    api: {
+        externalResolver: true,
+    },
+}

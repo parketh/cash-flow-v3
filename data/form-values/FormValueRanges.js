@@ -21,6 +21,12 @@ const FormValueRanges = {
         min: -1000,
         max: 1000,
     },
+    forecastCogsPct: { min: -1000, max: 1000 },
+    forecastVarOpCostPct: { min: -1000, max: 1000 },
+    forecastFixedOpCost: { min: -1000, max: 1000 },
+    forecastDeprPct: { min: -1000, max: 1000 },
+    forecastCapexPct: { min: -1000, max: 1000 },
+    forecastWorkingCapPct: { min: -1000, max: 1000 },
     g: {
         min: -1000,
         max: 1000,

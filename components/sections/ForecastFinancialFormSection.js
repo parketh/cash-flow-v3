@@ -52,9 +52,81 @@ const ForecastFinancialFormSection = ({ responses, alerts, handleResponseChange,
                     placeholder="0"
                     step="1"
                     id="forecastRevGrowth"
+                    unit="%"
                     response={responses.forecastRevGrowth}
                     handleResponseChangeNested={handleResponseChangeNested}
                     showAlert={alerts.forecastRevGrowth}
+                />
+                <TimeSeriesField
+                    label="Cost of goods sold (% of revenues)"
+                    start={responses.forecastStart}
+                    end={responses.forecastEnd}
+                    placeholder="0"
+                    step="1"
+                    id="forecastCogsPct"
+                    unit="%"
+                    response={responses.forecastCogsPct}
+                    handleResponseChangeNested={handleResponseChangeNested}
+                    showAlert={alerts.forecastCogsPct}
+                />
+                <TimeSeriesField
+                    label="Variable operating costs (% of revenues)"
+                    start={responses.forecastStart}
+                    end={responses.forecastEnd}
+                    placeholder="0"
+                    step="1"
+                    id="forecastVarOpCostPct"
+                    unit="%"
+                    response={responses.forecastVarOpCostPct}
+                    handleResponseChangeNested={handleResponseChangeNested}
+                    showAlert={alerts.forecastVarOpCostPct}
+                />
+                <TimeSeriesField
+                    label={"Fixed operating costs (" + responses.curr + " million)"}
+                    start={responses.forecastStart}
+                    end={responses.forecastEnd}
+                    placeholder="0"
+                    step="1"
+                    id="forecastFixedOpCost"
+                    response={responses.forecastFixedOpCost}
+                    handleResponseChangeNested={handleResponseChangeNested}
+                    showAlert={alerts.forecastFixedOpCost}
+                />
+                <TimeSeriesField
+                    label={"Depreciation (% of revenues)"}
+                    start={responses.forecastStart}
+                    end={responses.forecastEnd}
+                    placeholder="0"
+                    step="1"
+                    id="forecastDeprPct"
+                    response={responses.forecastDeprPct}
+                    handleResponseChangeNested={handleResponseChangeNested}
+                    unit="%"
+                    showAlert={alerts.forecastDeprPct}
+                />
+                <TimeSeriesField
+                    label={"Capex (% of revenues)"}
+                    start={responses.forecastStart}
+                    end={responses.forecastEnd}
+                    placeholder="0"
+                    step="1"
+                    id="forecastCapexPct"
+                    unit="%"
+                    response={responses.forecastCapexPct}
+                    handleResponseChangeNested={handleResponseChangeNested}
+                    showAlert={alerts.forecastCapexPct}
+                />
+                <TimeSeriesField
+                    label={"Working capital (% of revenues)"}
+                    start={responses.forecastStart}
+                    end={responses.forecastEnd}
+                    placeholder="0"
+                    step="1"
+                    id="forecastWorkingCapPct"
+                    unit="%"
+                    response={responses.forecastWorkingCapPct}
+                    handleResponseChangeNested={handleResponseChangeNested}
+                    showAlert={alerts.forecastWorkingCapPct}
                 />
                 {
                     <PercentageSelectorField

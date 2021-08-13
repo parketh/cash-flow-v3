@@ -1,15 +1,5 @@
-import { verify } from "jsonwebtoken"
 import { Form } from "@Models/form"
-import { findById } from "@Models/user"
-
-const getTokenFrom = (request) => {
-    const authorization = request.get("authorization")
-    if (authorization && authorization.toLowerCase().startsWith("bearer ")) {
-        const decodedToken = verify(authorization.substring(7), process.env.SECRET)
-        return decodedToken
-    }
-    return null
-}
+import User from "@Models/user"
 
 const formsHandler = async (request, response) => {
     if (request.method === "GET") {
@@ -21,13 +11,7 @@ const formsHandler = async (request, response) => {
         }
     } else if (request.method === "POST") {
         const body = request.body
-
-        const decodedToken = getTokenFrom(request)
-
-        if (!decodedToken || !decodedToken.id) {
-            return response.status(401).json({ error: "token missing or invalid" })
-        }
-        const user = await findById(decodedToken.id)
+        const user = await User.findById(body.userId)
 
         if (body === undefined) {
             return response.status(400).json({ error: "content missing" })

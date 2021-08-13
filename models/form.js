@@ -37,6 +37,30 @@ const formSchema = new mongoose.Schema({
         type: Map,
         of: Number,
     },
+    forecastCogsPct: {
+        type: Map,
+        of: Number,
+    },
+    forecastVarOpCostPct: {
+        type: Map,
+        of: Number,
+    },
+    forecastFixedOpCost: {
+        type: Map,
+        of: Number,
+    },
+    forecastDeprPct: {
+        type: Map,
+        of: Number,
+    },
+    forecastCapexPct: {
+        type: Map,
+        of: Number,
+    },
+    forecastWorkingCapPct: {
+        type: Map,
+        of: Number,
+    },
     g: Number,
     discRateApproach: String,
     rf: Number,

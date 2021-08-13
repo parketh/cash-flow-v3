@@ -53,7 +53,7 @@ class TimeSeriesField extends Component {
                                     value={String(this.props.response[year]) || ""}
                                     onChange={this.props.handleResponseChangeNested}
                                 />
-                                <span className="absolute right-2 mt-1 text-gray-500">%</span>
+                                <span className="absolute right-2 mt-1 text-gray-500">{this.props.unit}</span>
                                 <Alert showAlert={this.props.showAlert[year]} label={this.props.label} />
                             </div>
                         )
