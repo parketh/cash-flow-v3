@@ -6,8 +6,8 @@ import { join } from "path"
 const downloadHandler = (request, response) => {
     if (request.method === "POST") {
         response.setHeader("content-type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-        const readFile = join(__dirname, "../") + "/public/dcf_model_blank.xlsx"
-        const writeFile = join(__dirname, "../") + `/downloads/${request.params.id}.xlsx`
+        const readFile = join(__dirname, "../../") + "/public/dcf_model_blank.xlsx"
+        const writeFile = join(__dirname, "../../") + `/downloads/${request.params.id}.xlsx`
 
         if (existsSync(writeFile)) {
             try {
