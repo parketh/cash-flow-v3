@@ -3,7 +3,7 @@ const XLSX = require("xlsx")
 const lodash = require("lodash")
 const moment = require("moment")
 
-const GenerateModel = (res, readFile, writeFile, response, request) => {
+const generateModel = (res, readFile, writeFile, response, request) => {
     let responses = res[0]
     /*  DEFINE FUNCTIONS
         ------------------------------------------------------  */
@@ -484,4 +484,4 @@ const GenerateModel = (res, readFile, writeFile, response, request) => {
         })
 }
 
-export default GenerateModel
+export default generateModel

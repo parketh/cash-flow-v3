@@ -3,7 +3,7 @@ import { existsSync, unlinkSync } from "fs"
 import path from "path"
 import getConfig from "next/config"
 
-import GenerateModel from "~/services/GenerateModel"
+import generateModel from "~/services/generateModel"
 
 const downloadHandler = (request, response) => {
     const {
@@ -25,7 +25,7 @@ const downloadHandler = (request, response) => {
         }
 
         Form.find({}).then((form) => {
-            GenerateModel(form, readFile, writeFile, response, request)
+            generateModel(form, readFile, writeFile, response, request)
         })
     } else {
         response.status(405).end(`Method ${request.method} not allowed.`)
