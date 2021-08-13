@@ -1,8 +1,9 @@
 import { Form } from "@Models/form"
-import GenerateModel from "@Services/GenerateModel"
 import { existsSync, unlinkSync } from "fs"
 import path from "path"
 import getConfig from "next/config"
+
+import GenerateModel from path.join(getConfig().serverRuntimeConfig.PROJECT_ROOT, "services/GenerateModel")
 
 const downloadHandler = (request, response) => {
     const {
