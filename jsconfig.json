@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@Elements/*": ["components/elements/*"],
+            "@Modules/*": ["components/modules/*"],
+            "@Sections/*": ["components/sections/*"],
+            "@Layouts/*": ["components/layouts/*"],
+            "@Utils/*": ["utils/*"],
+            "@FormOptions/*": ["data/form-options/*"],
+            "@FormValues/*": ["data/form-values/*"],
+            "@CourseIndex/*": ["data/course-index/*"],
+            "@Models/*": ["models/*"],
+            "@Services/*": ["services/*"],
+            "~/*": ["/*"]
+        }
+    }
+}

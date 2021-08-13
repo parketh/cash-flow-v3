@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import lodash from "lodash"
 
-import FormService from "~/services/FormService"
+import FormService from "@Services/FormService"
 
 // Import UI components
 import ConfigFormSection from "@Sections/ConfigFormSection"
