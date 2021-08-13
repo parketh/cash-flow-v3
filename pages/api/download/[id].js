@@ -13,7 +13,7 @@ const downloadHandler = (request, response) => {
 
     if (method === "GET") {
         response.setHeader("content-type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-        const readFile = path.join(getConfig().serverRuntimeConfig.PROJECT_ROOT, "dcf_model_blank.xlsx")
+        const readFile = "/dcf_model_blank.xlsx"
         const writeFile = path.join(getConfig().serverRuntimeConfig.PROJECT_ROOT, `downloads/${id}.xlsx`)
 
         if (existsSync(writeFile)) {
