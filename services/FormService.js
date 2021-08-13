@@ -1,7 +1,6 @@
 import axios from "axios"
 
 const dev = process.env.NODE_ENV !== "production"
-console.log(dev ? "Launching in development mode (local)" : "Launching in production mode (Vercel)")
 
 const url = dev ? "http://localhost:3000" : "https://cash-flow-app.vercel.app"
 const formID = "61151be57473a6fd0499dc76"

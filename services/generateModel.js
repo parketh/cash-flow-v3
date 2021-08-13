@@ -189,13 +189,13 @@ const GenerateModel = (res, readFile, writeFile, response, request) => {
             if (dispCol === 1) {
                 for (let c = array.length; c >= 1; c--) {
                     for (let r = 1; r <= array[0].length; r++) {
-                        fillContentsAndStyles(c, r, (d = 1))
+                        fillContentsAndStyles(c, r, 1)
                     }
                 }
             } else if (dispCol === -1) {
                 for (let c = 1; c <= array.length; c++) {
                     for (let r = 1; r <= array[0].length; r++) {
-                        fillContentsAndStyles(c, r, (d = -1))
+                        fillContentsAndStyles(c, r, -1)
                     }
                 }
             }
@@ -304,13 +304,13 @@ const GenerateModel = (res, readFile, writeFile, response, request) => {
             if (dispRow == 1) {
                 for (let r = array.length; r >= 1; r--) {
                     for (let c = 1; c <= array[0].length; c++) {
-                        fillContentsAndStyles(c, r, (d = 1))
+                        fillContentsAndStyles(c, r, 1)
                     }
                 }
             } else if (dispRow == -1) {
                 for (let r = 1; r <= array.length; r++) {
                     for (let c = 1; c <= array[0].length; c++) {
-                        fillContentsAndStyles(c, r, (d = -1))
+                        fillContentsAndStyles(c, r, -1)
                     }
                 }
             }
@@ -411,7 +411,7 @@ const GenerateModel = (res, readFile, writeFile, response, request) => {
             // Update 'DCF', 'Forecast', 'IS', 'BS' and 'CFS' sheets
             if (forecastPeriods > 3) {
                 for (let i = 0; i < forecastPeriods - 3; i++) {
-                    dcfArray = updateSheet(workbook, "DCF", 8, 22, (dispCol = 1), (dispRow = 0), i, dcfArray)
+                    dcfArray = updateSheet(workbook, "DCF", 8, 22, 1, 0, i, dcfArray)
                     forecastArray = updateSheet(
                         workbook,
                         "Forecasts",
@@ -422,23 +422,23 @@ const GenerateModel = (res, readFile, writeFile, response, request) => {
                         i,
                         forecastArray
                     )
-                    ISArray = updateSheet(workbook, "IS", 8, 6, (dispCol = 1), (dispRow = 0), i, ISArray)
-                    BSArray = updateSheet(workbook, "BS", 8, 6, (dispCol = 1), (dispRow = 0), i, BSArray)
-                    CFSArray = updateSheet(workbook, "CFS", 8, 6, (dispCol = 1), (dispRow = 0), i, CFSArray)
+                    ISArray = updateSheet(workbook, "IS", 8, 6, 1, 0, i, ISArray)
+                    BSArray = updateSheet(workbook, "BS", 8, 6, 1, 0, i, BSArray)
+                    CFSArray = updateSheet(workbook, "CFS", 8, 6, 1, 0, i, CFSArray)
                 }
             } else if (forecastPeriods < 3) {
-                updateSheet(workbook, "DCF", 7, 22, (dispCol = -1), (dispRow = 0), 0)
-                updateSheet(workbook, "Forecasts", 7, 1, (dispCol = -1), (dispRow = 0), 0)
-                updateSheet(workbook, "IS", 7, 6, (dispCol = -1), (dispRow = 0), i)
-                updateSheet(workbook, "BS", 7, 6, (dispCol = -1), (dispRow = 0), i)
-                updateSheet(workbook, "CFS", 7, 6, (dispCol = -1), (dispRow = 0), i)
+                updateSheet(workbook, "DCF", 7, 22, -1, 0, 0)
+                updateSheet(workbook, "Forecasts", 7, 1, -1, 0, 0)
+                updateSheet(workbook, "IS", 7, 6, -1, 0, i)
+                updateSheet(workbook, "BS", 7, 6, -1, 0, i)
+                updateSheet(workbook, "CFS", 7, 6, -1, 0, i)
             }
 
             console.log("Performed structural changes")
 
             for (let i = 0; i < responses.comps.length - 1; i++) {
                 // Add rows for comps to 'Beta' sheet and update summary cells
-                betaArray = updateSheet(workbook, "Beta", 1, 49, (dispCol = 0), (dispRow = 1), i, betaArray)
+                betaArray = updateSheet(workbook, "Beta", 1, 49, 0, 1, i, betaArray)
                 const rows = [11, 12]
                 rows.forEach((row) => {
                     const formula = workbook.sheet("Beta").column(3).cell(row).formula()
@@ -447,7 +447,7 @@ const GenerateModel = (res, readFile, writeFile, response, request) => {
             }
             for (let i = 0; i < responses.comps.length - 1; i++) {
                 // Add rows for comps to 'Comps' sheet and update summary cells
-                compsArray = updateSheet(workbook, "Comps", 1, 37, (dispCol = 0), (dispRow = 1), i, compsArray)
+                compsArray = updateSheet(workbook, "Comps", 1, 37, 0, 1, i, compsArray)
                 const formula = workbook.sheet("Comps").column(4).cell(22).formula()
                 workbook.sheet("Comps").column(4).cell(22).formula(shiftFormula(formula, 0, 1))
             }
@@ -484,4 +484,4 @@ const GenerateModel = (res, readFile, writeFile, response, request) => {
         })
 }
 
-module.exports = GenerateModel
+export default GenerateModel
