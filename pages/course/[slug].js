@@ -1,102 +1,125 @@
-import React, { useRef } from "react"
+import React, { useState, useRef } from "react"
 import matter from "gray-matter"
 import ReactMarkdown from "react-markdown"
 import Link from "next/link"
 import gfm from "remark-gfm"
 
-import FormService from "~/services/FormService"
-import letterToNum from "~/utils/letterToNum"
-import numToLetter from "~/utils/numToLetter"
+import letterToNum from "@Utils/letterToNum"
+import numToLetter from "@Utils/numToLetter"
 
 import { CourseTopics, CourseIndex } from "@CourseIndex/CourseIndex"
+import path from "path"
+import getConfig from "next/config"
 
-class PostTemplate extends React.Component {
-    static async getInitialProps(context) {
-        const slug = context.query.slug
+import fs from "fs"
 
-        if (!slug) {
-            return {
-                data: { content: null },
-                current: null,
-                next: null,
-                previous: null,
-            }
-        }
+export async function getStaticPaths() {
+    if (CourseIndex.includes("id")) {
+        CourseIndex.shift("id")
+    }
 
-        const id = CourseIndex.findIndex((page) => page === slug)
+    const paths = await CourseIndex.map((page) => ({
+        params: {
+            slug: page,
+        },
+    }))
+    return {
+        paths,
+        fallback: false,
+    }
+}
 
-        // Import our .md file using the `slug` from the URL
-        const content = await FormService.getPages(slug)
+export async function getStaticProps({ params }) {
+    const { slug } = params
 
-        // Parse .md data through `matter`
-        const data = matter(content)
+    if (!CourseIndex.includes("id")) {
+        CourseIndex.unshift("id")
+    }
 
-        // Pass data to our component props
+    if (!slug) {
         return {
+            data: { content: null },
+            current: null,
+            next: null,
+            previous: null,
+        }
+    }
+
+    const id = CourseIndex.findIndex((page) => page === slug)
+
+    // Import our .md file using the `slug` from the URL
+    const content = await fs.readFileSync(
+        path.join(getConfig().serverRuntimeConfig.PROJECT_ROOT, `content/${slug}.md`),
+        "utf8"
+    )
+
+    // Parse .md data through `matter`
+    const data = matter(content)
+
+    // Pass data to our component props
+    return {
+        props: {
             data: { ...data },
             current: slug,
-            next: { contents: CourseIndex[id + 1], show: id === CourseIndex.length - 1 ? false : true },
-            previous: { contents: CourseIndex[id - 1], show: id === 0 ? false : true },
-        }
+            next: {
+                contents: id === CourseIndex.length - 1 ? "" : CourseIndex[id + 1],
+                show: id === CourseIndex.length - 1 ? false : true,
+            },
+            previous: { contents: id === 0 ? "" : CourseIndex[id - 1], show: id === 0 ? false : true },
+        },
     }
+}
 
-    constructor(props) {
-        super(props)
-        this.scrollRef = React.createRef()
-        this.state = {
-            allowScrolling: true,
-        }
-        this.toggleScrolling = this.toggleScrolling.bind(this)
-    }
+const PostTemplate = ({ data, current, next, previous }) => {
+    const [allowScrolling, setAllowScrolling] = useState(true)
+    const scrollRef = useRef()
 
-    toggleScrolling() {
-        this.setState({ allowScrolling: !this.state.allowScrolling })
-        if (this.state.allowScrolling) {
-            this.scrollRef.current.style.overflow = "hidden"
+    const toggleScrolling = () => {
+        setAllowScrolling(!allowScrolling)
+        if (allowScrolling) {
+            scrollRef.current.style.overflow = "hidden"
         } else {
-            this.scrollRef.current.style.overflow = "auto"
+            scrollRef.current.style.overflow = "auto"
         }
     }
 
-    render() {
-        const renderers = {
-            img: ({ alt, src, title }) => (
-                <div className="text-center justify-center flex -my-4">
-                    <img alt={alt} src={src} title={title} className="max-w-xl block w-full" />
-                </div>
-            ),
-            p: (props) => <div className="mb-6" {...props} />,
-        }
+    const renderers = {
+        img: ({ alt, src, title }) => (
+            <div className="text-center justify-center flex -my-4">
+                <img alt={alt} src={src} title={title} className="max-w-xl block w-full" />
+            </div>
+        ),
+        p: (props) => <div className="mb-6" {...props} />,
+    }
 
-        return (
-            <>
-                <div
-                    className="overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 select-none font-sans"
-                    ref={this.scrollRef}
-                >
-                    <div className="h-auto w-full space-y-2 flex justify-center">
-                        <div className="w-screen max-w-768 px-5 py-5">
-                            <div onMouseEnter={this.toggleScrolling} onMouseLeave={this.toggleScrolling}>
-                                <ProgressBar current={this.props.current} />
-                            </div>
-                            <article className="prose prose-2xl">
-                                <ReactMarkdown
-                                    children={this.props.data.content}
-                                    className="bodyTextTutorial"
-                                    remarkPlugins={[gfm]}
-                                    transformImageUri={(uri) => (uri.startsWith("http") ? uri : `/${uri}`)}
-                                    components={renderers}
-                                    skipHtml={false}
-                                />
-                            </article>
-                            <div className="mt-64"></div>
+    return (
+        <>
+            <div
+                className="overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 select-none font-sans"
+                ref={scrollRef}
+            >
+                <div className="h-auto w-full space-y-2 flex justify-center">
+                    <div className="w-screen max-w-768 px-5 py-5">
+                        <div onMouseEnter={toggleScrolling} onMouseLeave={toggleScrolling}>
+                            <ProgressBar current={current} />
                         </div>
+                        <article className="prose prose-2xl">
+                            <ReactMarkdown
+                                children={data.content}
+                                className="bodyTextTutorial"
+                                remarkPlugins={[gfm]}
+                                transformImageUri={(uri) => (uri.startsWith("http") ? uri : `/${uri}`)}
+                                components={renderers}
+                                skipHtml={false}
+                            />
+                        </article>
+                        <div className="mt-64"></div>
                     </div>
                 </div>
-                <NavBar previous={this.props.previous} next={this.props.next} />
-            </>
-        )
-    }
+            </div>
+            <NavBar previous={previous} next={next} />
+        </>
+    )
 }
 
 const ProgressBar = ({ current }) => {
