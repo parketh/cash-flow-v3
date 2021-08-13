@@ -9,7 +9,7 @@ const coursePagesHandler = (request, response) => {
     } = request
 
     if (method === "GET") {
-        const filepath = path.join(getConfig().serverRuntimeConfig.PROJECT_ROOT, `content/${id}.md`)
+        const filepath = path.join(getConfig().serverRuntimeConfig.PROJECT_ROOT, `static/coursepages/${id}.md`)
         const file = readFileSync(filepath, "utf8")
         response.send(file)
     } else {

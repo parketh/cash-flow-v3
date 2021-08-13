@@ -23,7 +23,7 @@ const PostTemplate = ({ content }) => {
 }
 
 PostTemplate.getInitialProps = async () => {
-    const content = await import(`~/content/index.md`)
+    const content = await import(`~/static/coursepages/index.md`)
 
     // Parse .md data through `matter`
     const data = matter(content.default)
