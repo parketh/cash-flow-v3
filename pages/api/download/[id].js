@@ -1,13 +1,19 @@
 import { Form } from "@Models/form"
-import GenerateModel from "@Services/generateModel"
+import GenerateModel from "@Services/GenerateModel"
 import { existsSync, unlinkSync } from "fs"
-import { join } from "path"
+import path from "path"
+import getConfig from "next/config"
 
 const downloadHandler = (request, response) => {
-    if (request.method === "POST") {
+    const {
+        query: { id },
+        method,
+    } = request
+
+    if (method === "GET") {
         response.setHeader("content-type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-        const readFile = join(__dirname, "../../") + "/public/dcf_model_blank.xlsx"
-        const writeFile = join(__dirname, "../../") + `/downloads/${request.params.id}.xlsx`
+        const readFile = path.join(getConfig().serverRuntimeConfig.PROJECT_ROOT, "public/dcf_model_blank.xlsx")
+        const writeFile = path.join(getConfig().serverRuntimeConfig.PROJECT_ROOT, `downloads/${id}.xlsx`)
 
         if (existsSync(writeFile)) {
             try {

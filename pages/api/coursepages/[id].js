@@ -1,5 +1,6 @@
 import { readFileSync } from "fs"
-import { join } from "path"
+import path from "path"
+import getConfig from "next/config"
 
 const coursePagesHandler = (request, response) => {
     const {
@@ -8,7 +9,7 @@ const coursePagesHandler = (request, response) => {
     } = request
 
     if (method === "GET") {
-        const filepath = join(__dirname, "../../../") + `/content/pages/${id}.md`
+        const filepath = path.join(getConfig().serverRuntimeConfig.PROJECT_ROOT, `content/${id}.md`)
         const file = readFileSync(filepath, "utf8")
         response.send(file)
     } else {

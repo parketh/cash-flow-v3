@@ -25,4 +25,7 @@ module.exports = {
     eslint: {
         ignoreDuringBuilds: true,
     },
+    serverRuntimeConfig: {
+        PROJECT_ROOT: __dirname,
+    },
 }

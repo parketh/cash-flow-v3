@@ -470,7 +470,7 @@ const generateModel = (res, readFile, writeFile, response, request) => {
 
             console.log("Saving workbook")
             return workbook.toFileAsync(writeFile).then(() => {
-                response.download(writeFile, `${request.params.id}.xlsx`, (err) => {
+                response.send(writeFile, `${request.query.id}.xlsx`, (err) => {
                     if (err) {
                         response.status(500).send({
                             message: "Could not download the file. " + err,
