@@ -1,9 +1,11 @@
 import axios from "axios"
 
-const dev = true
-// const dev = process.env.NODE_ENV !== "production"
+// const dev = true
+const dev = process.env.NODE_ENV === "development"
 
-const url = dev ? "http://localhost:3000" : "https://cash-flow-app.vercel.app"
+console.log("Development? " + dev)
+
+const url = dev ? "http://localhost:3000" : ""
 const formID = "61151be57473a6fd0499dc76"
 
 const retrieveForm = () => {
