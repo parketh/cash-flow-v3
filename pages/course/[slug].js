@@ -59,7 +59,7 @@ export async function getStaticProps({ params }) {
     // Pass data to our component props
     return {
         props: {
-            data: { ...data },
+            data: JSON.parse(JSON.stringify(data.content)),
             current: slug,
             next: {
                 contents: id === CourseIndex.length - 1 ? "" : CourseIndex[id + 1],
@@ -105,7 +105,7 @@ const PostTemplate = ({ data, current, next, previous }) => {
                         </div>
                         <article className="prose prose-2xl">
                             <ReactMarkdown
-                                children={data.content}
+                                children={data}
                                 className="bodyTextTutorial"
                                 remarkPlugins={[gfm]}
                                 transformImageUri={(uri) => (uri.startsWith("http") ? uri : `/${uri}`)}

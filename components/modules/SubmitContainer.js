@@ -44,7 +44,7 @@ const SubmitContainer = ({ responses, setResponses, setSampleValues, clearForm, 
     }
 
     return (
-        <div className="flex absolute bottom-0 bg-white h-32 md:h-20 w-screen bg-opacity-0 justify-center align-middle">
+        <div className="flex absolute bottom-0 bg-white h-32 md:h-20 w-screen bg-opacity-0 justify-center align-middle font-sans">
             <div className="flex flex-wrap backdrop-filter backdrop-blur-lg bg-opacity-30 border-t border-gray-200 justify-center align-middle py-3 w-screen h-full space-x-4">
                 <Button
                     onClick={setSampleValues}
