@@ -17,7 +17,7 @@ const DownloadSection = ({ allowDL }) => {
         return (
             <>
                 <SectionHeader title="DOWNLOAD" subtitle="Download your valuation model" />
-                <div className="sectionHeader mb-24">
+                <div className="sectionHeader">
                     <div className="mb-8 font-medium text-gray-500">Success! Download your model below.</div>
                     <Button
                         onClick={handleDownloadFile}
@@ -27,13 +27,14 @@ const DownloadSection = ({ allowDL }) => {
                     />
                     <DownloadLoader showDLLoader={showDLLoader} />
                 </div>
+                <div className="h-24"></div>
             </>
         )
     } else {
         return (
             <>
                 <SectionHeader title="DOWNLOAD" subtitle="Download your valuation model" />
-                <div className="sectionHeader mb-24">
+                <div className="sectionHeader">
                     <div className="mb-8 font-medium text-gray-500">
                         <span>
                             Whoops! It looks like you either haven't finished configuring your model, or you've just
@@ -43,6 +44,7 @@ const DownloadSection = ({ allowDL }) => {
                         <span>Configuration page to continue.</span>
                     </div>
                 </div>
+                <div className="h-24"></div>
             </>
         )
     }
@@ -57,7 +59,7 @@ const DownloadLoader = ({ showDLLoader }) => {
             </div>
         )
     } else {
-        return <div></div>
+        return <></>
     }
 }
 

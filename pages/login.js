@@ -1,7 +1,11 @@
 import DefaultLayout from "@Layouts/DefaultLayout"
 
 const Login = () => {
-    return <DefaultLayout>Hello world</DefaultLayout>
+    return (
+        <DefaultLayout>
+            <a href="/api/auth/login">Login</a>
+        </DefaultLayout>
+    )
 }
 
 export default Login
