@@ -144,9 +144,10 @@ const LoggedInMenubar = ({ user }) => {
                 {pages.map((page) => (
                     <MenubarItem slug={page.slug} name={page.name} pageName={pageName} setHover={setHover} />
                 ))}
+                <img src={user.picture} alt={user.name} className="rounded-full img-fluid profile-picture w-6 h-6" />
                 <MenubarItemLogout setHover={setHover} />
             </div>
-            <div className="grid grid-cols-2 space-x-3 justify-end justify-self-end lg:hidden mt-1">
+            <div className="grid grid-cols-3 space-x-3 justify-end justify-self-end lg:hidden mt-1">
                 <div className="grid space-y-3">
                     <input
                         type="image"
@@ -169,12 +170,17 @@ const LoggedInMenubar = ({ user }) => {
                         ))}
                     </div>
                 </div>
+                <img
+                    src={user.picture}
+                    alt={user.name}
+                    className="rounded-full img-fluid profile-picture w-6 h-6 mt-1"
+                />
                 <div className="w-6 pt-1">
                     <MenubarItemLogout setHover={() => {}} />
                 </div>
             </div>
 
-            <div className="text-sm absolute right-56 top-6 font-semibold mt-0.5 mr-2">{hover}</div>
+            <div className="text-sm absolute right-64 top-6 font-semibold mt-0.5 mr-2">{hover}</div>
         </div>
     )
 }
