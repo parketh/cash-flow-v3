@@ -25,12 +25,12 @@ const App = ({ Component, pageProps }) => {
 const Content = ({ Component, pageProps }) => {
     const { user, error, isLoading } = useUser()
 
-    if (isLoading) return <div>Loading...</div>
-    if (error) return <div>{error.message}</div>
+    if (isLoading) return <LoadingScreen />
+    if (error) return <>{error.message}</>
     if (user) {
         return (
             <>
-                <LoggedInMenubar />
+                <LoggedInMenubar user={user} />
                 <Component {...pageProps} />
             </>
         )
@@ -39,6 +39,16 @@ const Content = ({ Component, pageProps }) => {
         <>
             <LoggedOutMenubar />
             <Home />
+        </>
+    )
+}
+
+const LoadingScreen = () => {
+    return (
+        <>
+            <div className="h-screen flex">
+                <div className="m-auto text-lg font-semibold">Loading...</div>
+            </div>
         </>
     )
 }
@@ -83,7 +93,7 @@ const LoggedOutMenubar = () => {
     )
 }
 
-const LoggedInMenubar = () => {
+const LoggedInMenubar = ({ user }) => {
     const [hover, setHover] = useState("")
     const [expanded, setExpanded] = useState(false)
 
@@ -115,7 +125,7 @@ const LoggedInMenubar = () => {
     ]
 
     return (
-        <div className="bg-white h-auto px-6 py-4 w-full grid grid-cols-4 sticky font-sans relative">
+        <div className="bg-white h-auto px-6 py-4 w-full grid grid-cols-4 font-sans relative">
             <div className="col-span-1 flex space-x-4 w-48">
                 <Link href="/" passHref>
                     <input

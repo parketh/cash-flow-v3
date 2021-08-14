@@ -19,7 +19,7 @@ const Home = () => {
     }, [])
 
     return (
-        <div className="overflow-y-auto scrollbar scrollbar-thumb-gray-400 scrollbar-w-2 scrollbar-thumb-rounded-full select-none font-sans">
+        <div className="overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 select-none font-sans">
             <div className="h-auto w-full justify-center">
                 <div
                     className="h-auto object-cover bg-no-repeat bg-right w-full justify-center flex mb-24"
@@ -36,10 +36,10 @@ const Home = () => {
                             <span className="text-theme-dark font-normal">
                                 <TypewriterText
                                     words={[
-                                        "build a DCF model in seconds",
-                                        "learn financial analysis",
-                                        "modernise your build processes",
-                                        "implement best practices",
+                                        "build a DCF model in seconds.",
+                                        "learn financial analysis.",
+                                        "modernise your build processes.",
+                                        "implement best practices.",
                                     ]}
                                 />
                             </span>
@@ -209,7 +209,10 @@ const TypewriterText = ({ words }) => {
 
     return (
         <>
-            <h1>{`${words[index].substring(0, subIndex)}${blink ? "|" : " "}.`}</h1>
+            <div>
+                {`${words[index].substring(0, subIndex)}${blink ? "|" : " "}`}
+                <span className="opacity-0">.</span>
+            </div>
         </>
     )
 }
