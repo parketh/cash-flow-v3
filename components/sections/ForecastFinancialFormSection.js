@@ -22,7 +22,10 @@ const ForecastFinancialFormSection = ({ responses, alerts, handleResponseChange,
                         showAlert={alerts.useCiqForecast}
                     />
                 }
-                <Footnote text="Caution: Changing the forecast period will update all of the forecasting assumptions and may cause loss of unsaved data." />
+                <Footnote
+                    text="Caution: Changing the forecast period will update all of the forecasting assumptions and may cause loss of unsaved data. Please use the arrows to change the forecast start and end years."
+                    color="text-red-500"
+                />
                 {
                     <YearSelectorField
                         label="Forecast period start (YYYY)"

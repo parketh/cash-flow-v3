@@ -14,6 +14,11 @@ class YearSelectorField extends Component {
     }
 
     render() {
+        const response = (e) => {
+            e.preventDefault()
+            return false
+        }
+
         return (
             <div className={"space-y-1 " + this.getStyle()}>
                 <FieldLabel label={this.props.label} />
@@ -25,6 +30,15 @@ class YearSelectorField extends Component {
                     id={this.props.id}
                     value={this.props.response || ""}
                     onChange={this.props.handleResponseChange}
+                    onKeyPress={response}
+                    onDragStart={response}
+                    onSelectStart={response}
+                    onCut={response}
+                    onCopy={response}
+                    onPaste={response}
+                    onDrag={response}
+                    onDrop={response}
+                    autocomplete="off"
                 />
                 <Alert showAlert={this.props.showAlert} label={this.props.label} />
             </div>

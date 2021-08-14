@@ -9,7 +9,7 @@ const App = ({ Component, pageProps }) => {
     const [password, setPassword] = useState("")
 
     return (
-        <>
+        <div className="leading-6 sans-serif">
             <Head>
                 <title>Cash Flow</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -18,7 +18,7 @@ const App = ({ Component, pageProps }) => {
                 <Menubar />
                 <Component {...pageProps} />
             </div>
-        </>
+        </div>
     )
 }
 
