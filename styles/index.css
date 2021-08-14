@@ -1,4 +1,7 @@
 @tailwind base;
+
+/* purgecss start ignore */
+
 @tailwind components;
 
 .inputField {
@@ -32,3 +35,5 @@ input.percentValue[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
+/* purgecss end ignore */
