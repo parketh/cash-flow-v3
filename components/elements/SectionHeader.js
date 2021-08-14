@@ -13,11 +13,9 @@ class SectionHeader extends Component {
 
     render() {
         return (
-            <div ref={this.ref} className={this.getStyle()}>
-                <div className="justify-left items-center space-x-1 mb-2 mt-3">
-                    <span className="font-bold text-sm">{this.props.title} /</span>
-                    <span className="font-semibold text-sm text-gray-400">{this.props.subtitle}</span>
-                </div>
+            <div ref={this.ref} className={"justify-left items-center space-x-1 mb-2 mt-3 " + this.getStyle()}>
+                <span className="font-bold text-sm">{this.props.title} /</span>
+                <span className="font-semibold text-sm text-gray-400">{this.props.subtitle}</span>
             </div>
         )
     }

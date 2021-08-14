@@ -27,8 +27,8 @@ class ComparablesList extends Component {
     render() {
         if (typeof this.props.responses.comps != "undefined" && this.props.responses.comps.length > 0) {
             return (
-                <div className={this.getStyle()}>
-                    <table className="text-left w-full mt-2">
+                <>
+                    <table className={"text-left w-full mt-2 " + this.getStyle()}>
                         <thead>
                             <tr className="font-bold text-xs h-8">
                                 <th>Company</th>
@@ -57,10 +57,10 @@ class ComparablesList extends Component {
                             ))}
                         </tbody>
                     </table>
-                </div>
+                </>
             )
         } else {
-            return <div></div>
+            return <></>
         }
     }
 }

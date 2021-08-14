@@ -15,26 +15,23 @@ class PercentageSelectorField extends Component {
 
     render() {
         return (
-            <div className={this.getStyle()}>
-                <div className="grid space-y-1">
-                    <FieldLabel label={this.props.label} />
-                    <div className="relative">
-                        <input
-                            className={
-                                "inputField w-full percentValue " +
-                                (this.props.showAlert ? "border-1 border-accent" : "")
-                            }
-                            type="number"
-                            step={this.props.step}
-                            placeholder={this.props.placeholder}
-                            id={this.props.id}
-                            value={this.props.response || ""}
-                            onChange={this.props.handleResponseChange}
-                        />
-                        <span className="absolute right-2 mt-1 text-gray-500">%</span>
-                    </div>
-                    <Alert showAlert={this.props.showAlert} label={this.props.label} />
+            <div className={"grid space-y-1 " + this.getStyle()}>
+                <FieldLabel label={this.props.label} />
+                <div className="relative">
+                    <input
+                        className={
+                            "inputField w-full percentValue " + (this.props.showAlert ? "border-1 border-accent" : "")
+                        }
+                        type="number"
+                        step={this.props.step}
+                        placeholder={this.props.placeholder}
+                        id={this.props.id}
+                        value={this.props.response || ""}
+                        onChange={this.props.handleResponseChange}
+                    />
+                    <span className="absolute right-2 mt-1 text-gray-500">%</span>
                 </div>
+                <Alert showAlert={this.props.showAlert} label={this.props.label} />
             </div>
         )
     }

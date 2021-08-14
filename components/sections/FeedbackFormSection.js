@@ -58,7 +58,7 @@ const FeedbackFormSection = () => {
     }
 
     return (
-        <div>
+        <>
             <SectionHeader title="BEFORE YOU GO" subtitle="Please consider leaving some feedback!" />
             <div className="sectionHeader">
                 <Text>I'd love to know how you got on.</Text>
@@ -106,7 +106,7 @@ const FeedbackFormSection = () => {
                     buttonStyle="h-full w-full rounded font-bold bg-theme-lighter text-theme hover:bg-theme-light active:bg-theme-medium text-center"
                 />
             </div>
-        </div>
+        </>
     )
 }
 

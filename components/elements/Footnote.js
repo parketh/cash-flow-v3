@@ -13,9 +13,9 @@ class Footnote extends Component {
 
     render() {
         return (
-            <div className={this.getStyle()}>
-                <span className="inline-block text-sm italic">{this.props.text}</span>
-            </div>
+            <>
+                <span className={"inline-block text-sm italic " + this.getStyle()}>{this.props.text}</span>
+            </>
         )
     }
 }

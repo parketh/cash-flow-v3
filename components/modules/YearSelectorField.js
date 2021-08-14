@@ -15,20 +15,18 @@ class YearSelectorField extends Component {
 
     render() {
         return (
-            <div className={this.getStyle()}>
-                <div className="space-y-1">
-                    <FieldLabel label={this.props.label} />
-                    <input
-                        className={"inputField w-full " + (this.props.showAlert ? "border-1 border-accent" : "")}
-                        type="number"
-                        step={this.props.step}
-                        placeholder={this.props.placeholder}
-                        id={this.props.id}
-                        value={this.props.response || ""}
-                        onChange={this.props.handleResponseChange}
-                    />
-                    <Alert showAlert={this.props.showAlert} label={this.props.label} />
-                </div>
+            <div className={"space-y-1 " + this.getStyle()}>
+                <FieldLabel label={this.props.label} />
+                <input
+                    className={"inputField w-full " + (this.props.showAlert ? "border-1 border-accent" : "")}
+                    type="number"
+                    step={this.props.step}
+                    placeholder={this.props.placeholder}
+                    id={this.props.id}
+                    value={this.props.response || ""}
+                    onChange={this.props.handleResponseChange}
+                />
+                <Alert showAlert={this.props.showAlert} label={this.props.label} />
             </div>
         )
     }

@@ -13,9 +13,9 @@ class FieldLabel extends Component {
 
     render() {
         return (
-            <div className={this.getStyle()}>
-                <span className={"font-bold text-xs"}>{this.props.label}</span>
-            </div>
+            <>
+                <span className={"font-bold text-xs " + this.getStyle()}>{this.props.label}</span>
+            </>
         )
     }
 }

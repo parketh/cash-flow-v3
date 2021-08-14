@@ -7,9 +7,7 @@ const Alert = ({ showAlert, label }) => {
             </div>
         )
     } else {
-        return (
-            <div></div>
-        )
+        return <></>
     }
 }
 

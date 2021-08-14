@@ -6,7 +6,7 @@ const ConfirmationIndicator = ({ showConfirm, handleShowConfirm }) => {
             </div>
         )
     } else {
-        return <div></div>
+        return <></>
     }
 }
 

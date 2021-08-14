@@ -15,22 +15,20 @@ class DateField extends Component {
 
     render() {
         return (
-            <div className={this.getStyle()}>
-                <div className="grid space-y-1">
-                    <FieldLabel label={this.props.label} />
-                    <input
-                        className={this.props.showAlert ? "inputField border-1 border-accent" : "inputField"}
-                        type="date"
-                        min={this.props.min}
-                        max={this.props.max}
-                        placeholder={this.props.placeholder}
-                        id={this.props.id}
-                        value={this.props.response || ""}
-                        onChange={this.props.handleResponseChange}
-                        required
-                    />
-                    <Alert showAlert={this.props.showAlert} label={this.props.label} />
-                </div>
+            <div className={"grid space-y-1 " + this.getStyle()}>
+                <FieldLabel label={this.props.label} />
+                <input
+                    className={this.props.showAlert ? "inputField border-1 border-accent" : "inputField"}
+                    type="date"
+                    min={this.props.min}
+                    max={this.props.max}
+                    placeholder={this.props.placeholder}
+                    id={this.props.id}
+                    value={this.props.response || ""}
+                    onChange={this.props.handleResponseChange}
+                    required
+                />
+                <Alert showAlert={this.props.showAlert} label={this.props.label} />
             </div>
         )
     }

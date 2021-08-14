@@ -1,7 +1,6 @@
 const CopyPlugin = require("copy-webpack-plugin")
 
 module.exports = {
-    target: "serverless",
     webpack: (config, { dev, isServer }) => {
         config.module.rules.push({
             test: /\.md$/,

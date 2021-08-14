@@ -13,15 +13,13 @@ class Button extends Component {
 
     render() {
         return (
-            <div className={this.getStyle()}>
-                <div className={this.props.wrapperStyle}>
-                    <input
-                        className={this.props.buttonStyle}
-                        onClick={this.props.onClick || ""}
-                        value={this.props.value}
-                        type="submit"
-                    />
-                </div>
+            <div className={this.getStyle() + " " + this.props.wrapperStyle}>
+                <input
+                    className={this.props.buttonStyle}
+                    onClick={this.props.onClick || ""}
+                    value={this.props.value}
+                    type="submit"
+                />
             </div>
         )
     }

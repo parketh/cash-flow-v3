@@ -6,7 +6,7 @@
 }
 
 .sectionHeader {
-    @apply justify-center items-center bg-gray-100 w-full px-5 py-5 space-y-2 rounded-lg;
+    @apply justify-center items-center bg-gray-100 w-full px-5 py-5 space-y-4 rounded-lg;
 }
 
 .bodyText {
