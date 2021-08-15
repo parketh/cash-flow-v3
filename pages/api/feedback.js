@@ -8,6 +8,21 @@ const feedbackHandler = async (request, response) => {
         } catch (error) {
             console.log(error)
         }
+    } else if (request.method === "POST") {
+        const body = request.body
+
+        if (body === undefined) {
+            return response.status(400).json({ error: "content missing" })
+        }
+
+        const feedback = new Feedback(body)
+
+        try {
+            const savedResponse = await feedback.save()
+            response.json(savedResponse)
+        } catch (error) {
+            console.log(error)
+        }
     } else {
         response.status(405).end(`Method ${request.method} not allowed.`)
     }

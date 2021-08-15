@@ -17,10 +17,7 @@ const feedbackSchema = new mongoose.Schema({
     name: String,
     email: String,
     message: String,
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-    },
+    date: Date,
 })
 
 feedbackSchema.set("toJSON", {

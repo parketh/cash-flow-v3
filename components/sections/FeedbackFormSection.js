@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { useUser } from "@auth0/nextjs-auth0"
 import lodash from "lodash"
 
 import FormService from "~/services/FormService"
@@ -9,11 +10,16 @@ import Button from "@Elements/Button"
 import TextArea from "@Modules/TextArea"
 import TextField from "@Modules/TextField"
 
-import EmptyFeedbackFormValues from "@FormValues/EmptyFeedbackFormValues"
 import EmptyFeedbackFormAlerts from "@FormValues/EmptyFeedbackFormAlerts"
 
 const FeedbackFormSection = () => {
-    const [feedbackForm, setFeedbackForm] = useState(EmptyFeedbackFormValues)
+    const { user } = useUser()
+
+    const [feedbackForm, setFeedbackForm] = useState({
+        name: user.name,
+        email: user.email,
+        message: "",
+    })
 
     const [formCompleted, setFormCompleted] = useState(false)
 
@@ -42,7 +48,11 @@ const FeedbackFormSection = () => {
     const handleFormSubmit = (event) => {
         event.preventDefault()
         if (handleFormAlertsChange()) {
-            FormService.submitFeedback(feedbackForm).then(() => setFormCompleted(true))
+            console.log(formId)
+            FormService.submitFeedback({
+                ...feedbackForm,
+                date: new Date(),
+            }).then(() => setFormCompleted(true))
         }
     }
 

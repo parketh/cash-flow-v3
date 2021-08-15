@@ -4,6 +4,7 @@ const formHandler = (request, response) => {
     const {
         query: { id },
         method,
+        body,
     } = request
 
     switch (method) {
@@ -24,8 +25,6 @@ const formHandler = (request, response) => {
                 .catch((error) => next(error))
             break
         case "PUT":
-            const body = request.body
-
             Form.findByIdAndUpdate(id, body, { new: true, upsert: true, setDefaultsOnInsert: true })
                 .then((updatedResponse) => {
                     response.json(updatedResponse)

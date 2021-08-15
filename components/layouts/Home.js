@@ -28,7 +28,7 @@ const Home = () => {
                 >
                     <div className="w-960 px-5 py-5">
                         <div className="h-12"></div>
-                        <div className="text-6xl font-semibold my-10 leading-tight	">
+                        <div className="h-96 sm:h-60 lg:h-44 overflow-hidden text-6xl font-semibold my-10 leading-tight	">
                             <span className="text-theme-dark">Use </span>
                             <Image width={48} height={48} src="/images/logo.png" alt="logo" />
                             <span className="text-theme"> Cash Flow </span>
@@ -36,10 +36,10 @@ const Home = () => {
                             <span className="text-theme-dark font-normal">
                                 <TypewriterText
                                     words={[
-                                        "build a DCF model in seconds.",
-                                        "learn financial analysis.",
+                                        "build a DCF model in minutes.",
+                                        "learn to value any company.",
                                         "modernise your build processes.",
-                                        "implement best practices.",
+                                        "become a financial analyst.",
                                     ]}
                                 />
                             </span>
@@ -194,7 +194,7 @@ const TypewriterText = ({ words }) => {
 
         const timeout = setTimeout(() => {
             setSubIndex((prev) => prev + (reverse ? -1 : 1))
-        }, Math.max(reverse ? 1 : subIndex === words[index].length ? 1500 : 150, parseInt(Math.random() * 150)))
+        }, Math.max(reverse ? 1 : subIndex === words[index].length ? 1500 : 100, parseInt(Math.random() * 100)))
 
         return () => clearTimeout(timeout)
     }, [subIndex, index, reverse])
@@ -211,7 +211,7 @@ const TypewriterText = ({ words }) => {
         <>
             <div>
                 {`${words[index].substring(0, subIndex)}${blink ? "|" : " "}`}
-                <span className="opacity-0">.</span>
+                <span className="opacity-0"> .</span>
             </div>
         </>
     )

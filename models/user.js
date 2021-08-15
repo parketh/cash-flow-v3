@@ -15,22 +15,16 @@ mongoose
     })
 
 const userSchema = new mongoose.Schema({
-    username: {
+    auth0UserId: {
         type: String,
         unique: true,
     },
     name: String,
-    passwordHash: String,
+    email: String,
     forms: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Form",
-        },
-    ],
-    feedbacks: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Feedback",
         },
     ],
 })

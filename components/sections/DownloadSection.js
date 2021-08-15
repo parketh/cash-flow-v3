@@ -5,13 +5,15 @@ import FormService from "~/services/FormService"
 import Button from "@Elements/Button"
 import SectionHeader from "@Elements/SectionHeader"
 
-const DownloadSection = ({ allowDL }) => {
+const DownloadSection = ({ formId }) => {
     const [showDLLoader, setShowDLLoader] = useState(false)
 
     const handleDownloadFile = () => {
         setShowDLLoader(true)
-        FormService.downloadFile().then(() => setShowDLLoader(false))
+        FormService.downloadFile(formId).then(() => setShowDLLoader(false))
     }
+
+    const allowDL = formId ? true : false
 
     if (allowDL) {
         return (
@@ -40,7 +42,7 @@ const DownloadSection = ({ allowDL }) => {
                             Whoops! It looks like you either haven't finished configuring your model, or you've just
                             refreshed your page. Please return to the
                         </span>
-                        <img src="/images/settings.png" className="mx-2 pb-1 w-4 h-4 inline" alt="settings" />
+                        <img src="/images/config.png" className="mx-2 w-4 h-4 inline" alt="settings" />
                         <span>Configuration page to continue.</span>
                     </div>
                 </div>

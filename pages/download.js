@@ -3,13 +3,12 @@ import DownloadSection from "@Sections/DownloadSection"
 import FeedbackFormSection from "@Sections/FeedbackFormSection"
 import DefaultLayout from "@Layouts/DefaultLayout"
 
-const Download = () => {
-    const allowDL = true // TODO - rework temporary controller
-
+const Download = ({ formId }) => {
     return (
         <DefaultLayout>
-            <DownloadSection allowDL={allowDL} />
+            <DownloadSection formId={formId} />
             <FeedbackFormSection />
+            <div className="h-24"></div>
         </DefaultLayout>
     )
 }

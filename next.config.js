@@ -8,7 +8,13 @@ module.exports = {
         })
         // Fixes npm packages that depend on `fs` module
         if (!isServer) {
-            config.resolve.fallback.fs = false
+            config.resolve.fallback = {
+                ...config.resolve.fallback,
+                fs: false,
+                net: false,
+                tls: false,
+                dns: false,
+            }
         }
         // copy files you're interested in
         if (!dev) {
@@ -26,4 +32,5 @@ module.exports = {
     serverRuntimeConfig: {
         PROJECT_ROOT: __dirname,
     },
+    target: "serverless",
 }

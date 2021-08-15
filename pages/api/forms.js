@@ -11,19 +11,19 @@ const formsHandler = async (request, response) => {
         }
     } else if (request.method === "POST") {
         const body = request.body
-        const user = await User.findById(body.userId)
-
         if (body === undefined) {
             return response.status(400).json({ error: "content missing" })
         }
 
-        const form = new Form({
-            ...body,
-            user: user._id,
-        })
+        const user = await User.findById(body.user)
 
+        if (!user) {
+            console.log("No form found for user!")
+        }
+
+        const form = new Form({ ...body })
         const savedResponse = await form.save()
-        user.forms = user.forms.concat(savedResponse._id)
+        user.forms = user.forms.concat(savedResponse.id)
         await user.save()
 
         response.json(savedResponse)

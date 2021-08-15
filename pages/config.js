@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { useUser } from "@auth0/nextjs-auth0"
 import lodash from "lodash"
 
 import FormService from "@Services/FormService"
@@ -21,7 +22,11 @@ import FormValueRanges from "@FormValues/FormValueRanges"
 
 import range from "@Utils/range"
 
-const Configuration = () => {
+// import { Form } from "@Models/form"
+
+const Configuration = ({ formId, setFormId }) => {
+    const { user } = useUser()
+
     const [responses, setResponses] = useState([])
     const [alerts, setAlerts] = useState(EmptyFormAlerts)
 
@@ -37,27 +42,52 @@ const Configuration = () => {
 
     // Retrieve existing state of form from server on page load
     useEffect(() => {
-        FormService.retrieveForm()
-            .then((initialResponses) => {
-                setResponses(initialResponses)
-                let emptyAlerts = lodash.cloneDeep(initialResponses)
-                emptyAlerts = lodash.mapValues(emptyAlerts, (value) => {
-                    if (typeof value === "object" && value !== null) {
-                        return lodash.mapValues(value, () => false)
-                    } else {
-                        return false
-                    }
+        const initialiseForm = (initialResponses) => {
+            console.log(initialResponses)
+            setFormId(initialResponses.id)
+            setResponses(initialResponses)
+            let emptyAlerts = lodash.cloneDeep(initialResponses)
+            emptyAlerts = lodash.mapValues(emptyAlerts, (value) => {
+                if (typeof value === "object" && value !== null) {
+                    return lodash.mapValues(value, () => false)
+                } else {
+                    return false
+                }
+            })
+            emptyAlerts["comps"] = false
+            setAlerts(emptyAlerts)
+        }
+
+        FormService.retrieveUsers().then((existingUsers) => {
+            if (existingUsers.map((u) => u.auth0UserId).includes(user.sub)) {
+                console.log("match found!")
+                const existingUser = existingUsers.filter((u) => u.auth0UserId === user.sub)[0]
+                console.log(existingUser)
+                FormService.retrieveForm(existingUser.forms[0])
+                    .then((initialResponses) => initialiseForm(initialResponses))
+                    .then(() => {
+                        // if () {
+                        //     // TO DO - Set allow downloads to true
+                        // } else {
+                        //     // TO DO - Set allow downloads to false
+                        // }
+                    })
+            } else {
+                console.log("match not found!")
+                const newUser = {
+                    auth0UserId: user.sub,
+                    name: user.name,
+                    email: user.email,
+                    forms: [],
+                    feedbacks: [],
+                }
+                FormService.createUser(newUser).then((returnedUser) => {
+                    console.log(returnedUser)
+                    const newForm = { ...SampleFormValues, user: returnedUser.id }
+                    FormService.createForm(newForm).then((initialResponses) => initialiseForm(initialResponses))
                 })
-                emptyAlerts["comps"] = false
-                setAlerts(emptyAlerts)
-            })
-            .then(() => {
-                // if () {
-                //     // TO DO - Set allow downloads to true
-                // } else {
-                //     // TO DO - Set allow downloads to false
-                // }
-            })
+            }
+        })
     }, [])
 
     // Handle changes to form responses by updating state and cancelling active alerts
@@ -238,6 +268,7 @@ const Configuration = () => {
                 setSampleValues={setSampleValues}
                 clearForm={clearForm}
                 validateForm={validateForm}
+                formId={formId}
             />
         </>
     )

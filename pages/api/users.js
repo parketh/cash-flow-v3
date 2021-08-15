@@ -1,25 +1,17 @@
-import { hash } from "bcrypt"
 import User from "@Models/user"
 
 const usersHandler = async (request, response) => {
     if (request.method === "GET") {
         try {
-            const user = await User.find({}).populate("forms")
-            response.json(user)
+            const users = await User.find({})
+            response.json(users)
         } catch (error) {
             console.log(error)
         }
     } else if (request.method === "POST") {
         const body = request.body
 
-        const saltRounds = 10
-        const passwordHash = await hash(body.password, saltRounds)
-
-        const user = new User({
-            username: body.username,
-            name: body.name,
-            passwordHash,
-        })
+        const user = new User({ ...body })
 
         const savedUser = await user.save()
 

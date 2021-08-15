@@ -5,7 +5,7 @@ import FormService from "~/services/FormService"
 import Button from "@Elements/Button"
 import ButtonReactive from "@Elements/ButtonReactive"
 
-const SubmitContainer = ({ responses, setResponses, setSampleValues, clearForm, validateForm }) => {
+const SubmitContainer = ({ responses, setResponses, setSampleValues, clearForm, validateForm, formId }) => {
     const [saveButtonStatus, setSaveButtonStatus] = useState(0)
 
     // Handle status of save button (to control whether a confirmation, alert or no notification is shown)
@@ -34,7 +34,8 @@ const SubmitContainer = ({ responses, setResponses, setSampleValues, clearForm, 
         if (saveButtonStatus === 0) {
             if (validateForm()) {
                 handleSaveStatus(1)
-                FormService.updateForm(responses).then((returnedForm) => {
+                FormService.updateForm(formId, responses).then((returnedForm) => {
+                    console.log(returnedForm)
                     setResponses(returnedForm)
                 })
             } else {

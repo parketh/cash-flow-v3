@@ -32,13 +32,12 @@ class YearSelectorField extends Component {
                     onChange={this.props.handleResponseChange}
                     onKeyPress={response}
                     onDragStart={response}
-                    onSelectStart={response}
+                    onSelect={response}
                     onCut={response}
                     onCopy={response}
                     onPaste={response}
                     onDrag={response}
                     onDrop={response}
-                    autocomplete="off"
                 />
                 <Alert showAlert={this.props.showAlert} label={this.props.label} />
             </div>

@@ -4,17 +4,28 @@ import axios from "axios"
 const dev = process.env.NODE_ENV === "development"
 
 const url = dev ? "http://localhost:3000" : ""
-const formID = "611684e06d925e1ce0b0c9df"
 
-const retrieveForm = () => {
+const createForm = (form) => {
+    return axios.post(`${url}/api/forms`, form).then((response) => response.data)
+}
+
+const retrieveForm = (formID) => {
     return axios.get(`${url}/api/forms/${formID}`).then((response) => response.data)
 }
 
-const updateForm = (updatedForm) => {
+const updateForm = (formID, updatedForm) => {
     return axios.put(`${url}/api/forms/${formID}`, updatedForm).then((response) => response.data)
 }
 
-const downloadFile = () => {
+const createUser = (user) => {
+    return axios.post(`${url}/api/users`, user).then((response) => response.data)
+}
+
+const retrieveUsers = () => {
+    return axios.get(`${url}/api/users`).then((response) => response.data)
+}
+
+const downloadFile = (formID) => {
     return axios({
         url: `${url}/api/download/${formID}`,
         method: "GET",
@@ -34,7 +45,10 @@ const downloadFile = () => {
 }
 
 const submitFeedback = (feedback) => {
-    return axios.post(`${url}/api/feedback/${formID}`, feedback).then((response) => response.data)
+    return axios.post(`${url}/api/feedback`, feedback).then((response) => {
+        console.log(response.data)
+        return response.data
+    })
 }
 
 const getPages = (slug) => {
@@ -46,8 +60,11 @@ const getPages = (slug) => {
 }
 
 const exportedServices = {
+    createForm,
     retrieveForm,
     updateForm,
+    createUser,
+    retrieveUsers,
     downloadFile,
     submitFeedback,
     getPages,

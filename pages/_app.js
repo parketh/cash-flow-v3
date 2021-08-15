@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import Link from "next/link"
 import Head from "next/head"
 import { useRouter } from "next/router"
@@ -24,9 +24,12 @@ const App = ({ Component, pageProps }) => {
 
 const Content = ({ Component, pageProps }) => {
     const { user, error, isLoading } = useUser()
+    const [formId, setFormId] = useState("")
+
+    pageProps = { ...pageProps, formId: formId, setFormId: setFormId }
 
     if (isLoading) return <LoadingScreen />
-    if (error) return <>{error.message}</>
+    if (error) return <ErrorScreen error={error} />
     if (user) {
         return (
             <>
@@ -47,7 +50,17 @@ const LoadingScreen = () => {
     return (
         <>
             <div className="h-screen flex">
-                <div className="m-auto text-lg font-semibold">Loading...</div>
+                <img className="m-auto animate-bounce w-16 h-16" src="images/logo.png" />
+            </div>
+        </>
+    )
+}
+
+const ErrorScreen = ({ error }) => {
+    return (
+        <>
+            <div className="h-screen flex">
+                <div className="m-auto font-semibold">{error.message}</div>
             </div>
         </>
     )
@@ -94,8 +107,9 @@ const LoggedOutMenubar = () => {
 }
 
 const LoggedInMenubar = ({ user }) => {
-    const [hover, setHover] = useState("")
     const [expanded, setExpanded] = useState(false)
+    const [hover, setHover] = useState("")
+    const menuRef = useRef()
 
     const router = useRouter()
     const page = router.pathname.substring(router.pathname.lastIndexOf("/") + 1)
@@ -117,15 +131,28 @@ const LoggedInMenubar = ({ user }) => {
         setExpanded(!expanded)
     }
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setExpanded(false)
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => {
+            // Unbind the event listener on clean up
+            document.removeEventListener("mousedown", handleClickOutside)
+        }
+    }, [menuRef])
+
     const pages = [
-        { slug: "docs", name: "Documentation" },
-        { slug: "course", name: "Course" },
-        { slug: "config", name: "Configuration" },
-        { slug: "download", name: "Download" },
+        { id: 1, slug: "docs", name: "Documentation" },
+        { id: 2, slug: "course", name: "Course" },
+        { id: 3, slug: "config", name: "Configuration" },
+        { id: 4, slug: "download", name: "Download" },
     ]
 
     return (
-        <div className="bg-white h-auto px-6 py-4 w-full grid grid-cols-4 font-sans relative">
+        <div className="bg-white h-auto px-6 py-4 w-full grid grid-cols-4 font-sans relative" ref={menuRef}>
             <div className="col-span-1 flex space-x-4 w-48">
                 <Link href="/" passHref>
                     <input
@@ -140,15 +167,19 @@ const LoggedInMenubar = ({ user }) => {
             <div className="col-span-2 text-center pt-1">
                 <span className="text-theme text-xl font-semibold">{pageName}</span>
             </div>
+            {/* Navbar for larger screens */}
             <div className="col-span-1 pt-2 space-x-2 sm:space-x-4 w-48 text-right justify-self-end justify-end hidden lg:flex">
                 {pages.map((page) => (
-                    <MenubarItem slug={page.slug} name={page.name} pageName={pageName} setHover={setHover} />
+                    <div key={page.id}>
+                        <MenubarItem slug={page.slug} name={page.name} pageName={pageName} setHover={setHover} />
+                    </div>
                 ))}
-                <img src={user.picture} alt={user.name} className="rounded-full img-fluid profile-picture w-6 h-6" />
+                <MenubarItemProfile user={user} setHover={setHover} />
                 <MenubarItemLogout setHover={setHover} />
             </div>
-            <div className="grid grid-cols-3 space-x-3 justify-end justify-self-end lg:hidden mt-1">
-                <div className="grid space-y-3">
+            {/* Navbar for smaller screens */}
+            <div className="grid grid-cols-2 gap-x-5 justify-end justify-self-end lg:hidden mt-1">
+                <div>
                     <input
                         type="image"
                         className="pt-1 w-6 opacity-60"
@@ -156,10 +187,21 @@ const LoggedInMenubar = ({ user }) => {
                         alt="menu"
                         onClick={handleClickMenu}
                     />
-                    <div className={"col-span-1 pt-2 space-y-2 grid grid-rows-4 " + (expanded ? "" : "hidden")}>
+                    <div
+                        className={
+                            "col-span-1 pt-2 space-y-2 grid grid-rows-4 text-gray-800 " + (expanded ? "" : "hidden")
+                        }
+                    >
+                        <div className="relative">
+                            <div className="text-sm font-semibold absolute right-12 text-right top-0.5 w-48">{`Welcome, ${user.name}!`}</div>
+                            <MenubarItemProfile user={user} setHover={() => {}} />
+                        </div>
+
                         {pages.map((page) => (
-                            <div className="relative">
-                                <div className="text-sm font-semibold absolute right-12 top-0.5">{page.name}</div>
+                            <div className="relative" key={page.id}>
+                                <div className="text-sm font-semibold absolute text-right right-12 top-0.5">
+                                    {page.name}
+                                </div>
                                 <MenubarItem
                                     slug={page.slug}
                                     name={page.name}
@@ -170,17 +212,12 @@ const LoggedInMenubar = ({ user }) => {
                         ))}
                     </div>
                 </div>
-                <img
-                    src={user.picture}
-                    alt={user.name}
-                    className="rounded-full img-fluid profile-picture w-6 h-6 mt-1"
-                />
-                <div className="w-6 pt-1">
+                <div className="mt-1">
                     <MenubarItemLogout setHover={() => {}} />
                 </div>
             </div>
 
-            <div className="text-sm absolute right-64 top-6 font-semibold mt-0.5 mr-2">{hover}</div>
+            <div className="text-sm absolute right-64 top-6 font-semibold mt-0.5 mr-2 text-gray-800">{hover}</div>
         </div>
     )
 }
@@ -212,6 +249,25 @@ const MenubarItem = ({ slug, name, pageName, setHover }) => {
     )
 }
 
+const MenubarItemProfile = ({ user, setHover }) => {
+    const onHover = () => {
+        setHover(`Welcome, ${user.name}!`)
+    }
+    const onLeave = () => {
+        setHover("")
+    }
+
+    return (
+        <img
+            src={user.picture}
+            alt={user.name}
+            className="rounded-full img-fluid profile-picture w-6 h-6"
+            onMouseEnter={onHover}
+            onMouseLeave={onLeave}
+        />
+    )
+}
+
 const MenubarItemLogout = ({ setHover }) => {
     const onHover = () => {
         setHover("Logout")
@@ -224,7 +280,7 @@ const MenubarItemLogout = ({ setHover }) => {
         <a href="/api/auth/logout">
             <input
                 type="image"
-                className="w-6 cursor-pointer hover:opacity-80 pb-1 border-b-2 border-accent border-opacity-0"
+                className="w-6 cursor-pointer hover:opacity-80 pb-1 border-b-2 border-opacity-0"
                 src="/images/logout.png"
                 alt="logout"
                 onMouseEnter={onHover}
