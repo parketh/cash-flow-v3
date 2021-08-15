@@ -98,11 +98,11 @@ module.exports = {
             typography: {
                 DEFAULT: {
                     css: {
-                        // "ul li": {
-                        //     "&::before": {
-                        //         backgroundColor: "#1440aa",
-                        //     },
-                        // },
+                        "ol li": {
+                            "&::before": {
+                                opacity: 0,
+                            },
+                        },
                         strong: {
                             color: "#1440aa",
                             fontWeight: 700,
