@@ -97,8 +97,6 @@ const Configuration = ({ formId, setFormId }) => {
               )
             : event.target.value
 
-        console.log(value)
-
         switch (event.target.id) {
             case "forecastStart":
             case "forecastEnd":

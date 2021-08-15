@@ -30,9 +30,11 @@ const downloadHandler = (request, response) => {
             }
         }
 
-        Form.find({}).then((form) => {
-            generateModel(form, readFile, writeFile, response, request)
-        })
+        Form.findById(id)
+            .then((form) => {
+                generateModel(form, readFile, writeFile, response, request)
+            })
+            .catch((error) => console.error(error))
     } else {
         response.status(405).end(`Method ${request.method} not allowed.`)
     }

@@ -5,7 +5,7 @@ const moment = require("moment")
 const fs = require("fs")
 
 const generateModel = (res, readFile, writeFile, response, request) => {
-    let responses = res[0]
+    let responses = res
     /*  DEFINE FUNCTIONS
         ------------------------------------------------------  */
     /*  Shifts a column reference, 'ref', by 'd' displacements in the alphabet. d can be either positive or negative.
@@ -324,6 +324,7 @@ const generateModel = (res, readFile, writeFile, response, request) => {
 
     // Map years to dates for each of the specified variables
     const forecastPeriods = responses.forecastEnd - responses.forecastStart + 1
+    const historicalPeriods = responses.histEnd - responses.histStart + 1
     const forecastStartYear = lodash.cloneDeep(responses.forecastStart)
     const forecastEndYear = lodash.cloneDeep(responses.forecastEnd)
     const periodNames = ["histStart", "histEnd", "forecastStart", "forecastEnd"]
@@ -341,7 +342,7 @@ const generateModel = (res, readFile, writeFile, response, request) => {
     })
 
     // Convert variables from integers to decimals
-    const percentNames = ["g", "rf", "erp", "preTaxRd", "debtRatio", "t"]
+    const percentNames = ["g", "rf", "erp", "preTaxRd", "debtRatio", "t", "rOverride"]
     percentNames.forEach((name) => {
         responses[name] = responses[name] === null ? responses[name] : Number(responses[name]) / 100
     })
@@ -412,18 +413,25 @@ const generateModel = (res, readFile, writeFile, response, request) => {
             let betaArray = []
             let compsArray = []
 
-            // Update 'DCF', 'Forecast', 'IS', 'BS' and 'CFS' sheets
+            // Update 'DCF' and 'Forecast' sheets
             if (forecastPeriods > 3) {
                 for (let i = 0; i < forecastPeriods - 3; i++) {
                     dcfArray = updateSheet(workbook, "DCF", 8, 22, 1, 0, i, dcfArray)
                     forecastArray = updateSheet(workbook, "Forecasts", 8, 1, 1, 0, i, forecastArray)
-                    ISArray = updateSheet(workbook, "IS", 8, 6, 1, 0, i, ISArray)
-                    BSArray = updateSheet(workbook, "BS", 8, 6, 1, 0, i, BSArray)
-                    CFSArray = updateSheet(workbook, "CFS", 8, 6, 1, 0, i, CFSArray)
                 }
             } else if (forecastPeriods < 3) {
                 updateSheet(workbook, "DCF", 7, 22, -1, 0, 0)
                 updateSheet(workbook, "Forecasts", 7, 1, -1, 0, 0)
+            }
+
+            // Update 'IS', 'BS' and 'CFS' sheets
+            if (historicalPeriods > 3) {
+                for (let i = 0; i < historicalPeriods - 3; i++) {
+                    ISArray = updateSheet(workbook, "IS", 8, 6, 1, 0, i, ISArray)
+                    BSArray = updateSheet(workbook, "BS", 8, 6, 1, 0, i, BSArray)
+                    CFSArray = updateSheet(workbook, "CFS", 8, 6, 1, 0, i, CFSArray)
+                }
+            } else if (historicalPeriods < 3) {
                 updateSheet(workbook, "IS", 7, 6, -1, 0, i)
                 updateSheet(workbook, "BS", 7, 6, -1, 0, i)
                 updateSheet(workbook, "CFS", 7, 6, -1, 0, i)

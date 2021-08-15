@@ -46,7 +46,6 @@ const downloadFile = (formID) => {
 
 const submitFeedback = (feedback) => {
     return axios.post(`${url}/api/feedback`, feedback).then((response) => {
-        console.log(response.data)
         return response.data
     })
 }
