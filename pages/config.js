@@ -97,6 +97,8 @@ const Configuration = ({ formId, setFormId }) => {
               )
             : event.target.value
 
+        console.log(value)
+
         switch (event.target.id) {
             case "forecastStart":
             case "forecastEnd":
@@ -113,7 +115,6 @@ const Configuration = ({ formId, setFormId }) => {
                     for (const [key, value] of Object.entries(deepCopy[variable])) {
                         if (Number(key) < forecastStart || Number(key) > forecastEnd) {
                             delete deepCopy[variable][key]
-                            console.log(deepCopy)
                         }
                     }
                     range(forecastStart, forecastEnd + 1).map((year) => {
