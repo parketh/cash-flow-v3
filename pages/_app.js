@@ -120,6 +120,7 @@ const LoggedInMenubar = ({ user }) => {
         download: "Download",
         docs: "Documentation",
         starter: "Documentation",
+        privacy: "Privacy",
     }
 
     let pageName = pageMap[page]

@@ -2,7 +2,6 @@ import React from "react"
 import Link from "next/link"
 import Image from "next/image"
 
-import Button from "@Elements/Button"
 import DefaultLayout from "@Layouts/DefaultLayout"
 
 const Docs = () => {
@@ -52,7 +51,7 @@ const Docs = () => {
                     </span>
                 </div>
                 <div className="bodyTextSmall ml-4">
-                    <Image height={16} width={16} src="/images/settings.png" alt="config" />
+                    <Image height={16} width={16} src="/images/config.png" alt="config" />
                     <span className="text-theme"> Configuration</span>
                     <span>
                         : the control panel for your financial model—this is where you'll configure all of your settings
@@ -60,7 +59,7 @@ const Docs = () => {
                     </span>
                 </div>
                 <div className="bodyTextSmall ml-4">
-                    <Image height={16} width={16} src="/images/settings.png" alt="config" />
+                    <Image height={16} width={16} src="/images/download.png" alt="config" />
                     <span className="text-theme"> Download</span>
                     <span>
                         : the page to download your model once it is configured. You can also find a feedback form on
@@ -134,12 +133,13 @@ const Docs = () => {
                 <div className="text-xl font-semibold mb-6 pt-4">5 - Downloading your model</div>
                 <div className="bodyTextSmall">
                     Once your settings are saved, you can head over to the Download page to download your financial
-                    model. When you first open the Excel file, you may need to:
+                    model. When you first open the Excel file, you may need to refresh all formulae by hitting the F9
+                    key.
                 </div>
                 <div className="bodyTextSmall">
                     You should now have a brand new valuation model created based on your chosen settings. However,
-                    you're not done! There are a few additional things you need to complete in Excel in order to finish
-                    off your model. Let's first understand the structure of the model.
+                    you're not done! There are a few more things you need to complete in Excel in order to finish off
+                    your model. Before getting into that, let's first understand the structure of the model.
                 </div>
                 <div className="text-xl font-semibold mb-6 pt-4">6 - Structure of your model</div>
                 <div className="bodyTextSmall">
@@ -205,14 +205,28 @@ const Docs = () => {
 
                 <div className="text-xl font-semibold mb-6 pt-4">7 - Finishing your model in Excel</div>
                 <div className="bodyTextSmall">
-                    As mentioned, there are a few additional inputs you need to configure in Excel. These are
-                    conveniently highlighted for you (see the tabs and cells coloured in yellow), and where appropriate,
-                    annotated with red text.
+                    As mentioned, there are a few additional inputs you need to configure in Excel. These are in the
+                    Beta tab, as conveniently highlighted in yellow.
                 </div>
                 <div className="bodyTextSmall">
-                    There are three steps to finishing off your model:
-                    <div className="mt-4 ml-4">1. Financial forecasts</div>
+                    <div className="mt-4 ml-4">
+                        1. Tax rates: Capital IQ does not currently provide the corporate tax rates for companies. You
+                        will have to manually insert these yourself. You can refer to the{" "}
+                        <a
+                            className="text-theme"
+                            href="https://home.kpmg/xx/en/home/services/tax/tax-tools-and-resources/tax-rates-online/corporate-tax-rates-table.html"
+                        >
+                            KPMG corporate tax tables
+                        </a>{" "}
+                        for more information.{" "}
+                    </div>
+                    <div className="mt-4 ml-4">
+                        2. Beta: the model calculates beta based on two-year weekly market returns. Other types of beta
+                        calculations are not currently supported, however if you are particularly saavy in Excel it is
+                        relatively simple to configure it to use other frequencies.
+                    </div>
                 </div>
+                <div className="bodyTextSmall">You should now have a working financial model! 🙌</div>
 
                 <div className="text-xl font-semibold mb-6 pt-4">8 - Supported devices</div>
                 <div className="bodyTextSmall">
@@ -221,8 +235,8 @@ const Docs = () => {
                 </div>
 
                 <div className="bodyTextSmall">
-                    You can also run the app from a mobile device (both iOS and Android), but using a laptop or desktop
-                    with Chrome will yield the best experience.
+                    You can also run the app from a mobile device (both iOS and Android), but this has not been
+                    extensively tested and may yield unpredictable results.
                 </div>
                 <div className="bodyTextSmall">
                     The Excel model can only be used on Windows, as the Capital IQ plugin is currently not supported on
@@ -230,6 +244,7 @@ const Docs = () => {
                     are working on a Mac device.
                 </div>
             </div>
+            <div className="h-24"></div>
         </DefaultLayout>
     )
 }

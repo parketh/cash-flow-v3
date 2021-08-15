@@ -20,6 +20,10 @@
     @apply mb-8 font-medium text-gray-500;
 }
 
+.bodyTitle {
+    @apply text-xl font-semibold mb-6 pt-4;
+}
+
 .bodyTextTutorial {
     @apply text-base font-medium mb-8 leading-relaxed text-gray-500;
 }

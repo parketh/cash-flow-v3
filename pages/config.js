@@ -40,29 +40,29 @@ const Configuration = ({ formId, setFormId }) => {
         "forecastWorkingCapPct",
     ]
 
+    const generateEmptyAlerts = (currentResponse) => {
+        let emptyAlerts = lodash.cloneDeep(currentResponse)
+        emptyAlerts = lodash.mapValues(emptyAlerts, (value) => {
+            if (typeof value === "object" && value !== null) {
+                return lodash.mapValues(value, () => false)
+            } else {
+                return false
+            }
+        })
+        return emptyAlerts
+    }
+
     // Retrieve existing state of form from server on page load
     useEffect(() => {
         const initialiseForm = (initialResponses) => {
-            console.log(initialResponses)
             setFormId(initialResponses.id)
             setResponses(initialResponses)
-            let emptyAlerts = lodash.cloneDeep(initialResponses)
-            emptyAlerts = lodash.mapValues(emptyAlerts, (value) => {
-                if (typeof value === "object" && value !== null) {
-                    return lodash.mapValues(value, () => false)
-                } else {
-                    return false
-                }
-            })
-            emptyAlerts["comps"] = false
-            setAlerts(emptyAlerts)
+            setAlerts(generateEmptyAlerts(initialResponses))
         }
 
         FormService.retrieveUsers().then((existingUsers) => {
             if (existingUsers.map((u) => u.auth0UserId).includes(user.sub)) {
-                console.log("match found!")
                 const existingUser = existingUsers.filter((u) => u.auth0UserId === user.sub)[0]
-                console.log(existingUser)
                 FormService.retrieveForm(existingUser.forms[0])
                     .then((initialResponses) => initialiseForm(initialResponses))
                     .then(() => {
@@ -73,7 +73,6 @@ const Configuration = ({ formId, setFormId }) => {
                         // }
                     })
             } else {
-                console.log("match not found!")
                 const newUser = {
                     auth0UserId: user.sub,
                     name: user.name,
@@ -82,7 +81,6 @@ const Configuration = ({ formId, setFormId }) => {
                     feedbacks: [],
                 }
                 FormService.createUser(newUser).then((returnedUser) => {
-                    console.log(returnedUser)
                     const newForm = { ...SampleFormValues, user: returnedUser.id }
                     FormService.createForm(newForm).then((initialResponses) => initialiseForm(initialResponses))
                 })
@@ -160,7 +158,7 @@ const Configuration = ({ formId, setFormId }) => {
     const setSampleValues = () => {
         if (window.confirm(`Overwrite current settings with sample settings? Any unsaved changes will be lost.`)) {
             setResponses(SampleFormValues)
-            setAlerts(Object.fromEntries(Object.keys(alerts).map((key) => [key, false])))
+            setAlerts(generateEmptyAlerts(responses))
         }
     }
 
@@ -168,7 +166,7 @@ const Configuration = ({ formId, setFormId }) => {
     const clearForm = () => {
         if (window.confirm(`Clear settings? Any unsaved changes will be lost.`)) {
             setResponses(EmptyFormValues)
-            setAlerts(Object.fromEntries(Object.keys(alerts).map((key) => [key, false])))
+            setAlerts(generateEmptyAlerts(responses))
         }
     }
 

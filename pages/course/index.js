@@ -17,7 +17,7 @@ const PostTemplate = ({ content }) => {
                     <input className="w-6 h-6" type="image" src="/images/next.png" alt="next" />
                 </Link>
             </div>
-            <div className="mt-64"></div>
+            <div className="h-48"></div>
         </DefaultLayout>
     )
 }
