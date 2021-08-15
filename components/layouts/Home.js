@@ -66,12 +66,23 @@ const Home = () => {
 
                 <div className="h-auto w-full justify-center flex bg-gray-200 py-12" ref={userGuideRef}>
                     <div className="w-960 px-5 py-5">
+                        <div class="aspect-w-16 aspect-h-9 mb-24">
+                            <iframe
+                                width="560"
+                                height="315"
+                                src="https://www.youtube.com/embed/21ZneO7Z2Dc"
+                                title="YouTube video player"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                            ></iframe>
+                        </div>
                         <div className="text-4xl font-semibold text-theme-dark mb-8">Quick Start Guide</div>
                         <div className="bg-accent w-12 h-1 mb-8"></div>
                         <div className="text-2xl font-semibold mb-8 pt-4">🤔 What is Cash Flow?</div>
                         <div className="bodyText">
                             Cash Flow is a tool to help you setup a robust, flexible discounted cash flow model in
-                            seconds.
+                            minutes.
                         </div>
                         <div className="bodyText">
                             If you have a Capital IQ subscription, Cash Flow will automatically import financial

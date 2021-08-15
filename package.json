@@ -46,6 +46,7 @@
         "@babel/core": "^7.14.6",
         "@babel/preset-react": "^7.14.5",
         "@fullhuman/postcss-purgecss": "^4.0.3",
+        "@tailwindcss/aspect-ratio": "^0.2.1",
         "@types/react": "^17.0.14",
         "autoprefixer": "^10.2.6",
         "babel-plugin-styled-components": "^1.13.2",

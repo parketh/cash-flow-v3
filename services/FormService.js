@@ -51,14 +51,6 @@ const submitFeedback = (feedback) => {
     })
 }
 
-const getPages = (slug) => {
-    return axios({
-        url: `${url}/api/coursepages/${slug}`,
-        method: "GET",
-        headers: { "Content-Type": "text/markdown" },
-    }).then((response) => response.data)
-}
-
 const exportedServices = {
     createForm,
     retrieveForm,
@@ -67,7 +59,6 @@ const exportedServices = {
     retrieveUsers,
     downloadFile,
     submitFeedback,
-    getPages,
 }
 
 export default exportedServices

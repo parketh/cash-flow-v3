@@ -98,11 +98,11 @@ module.exports = {
             typography: {
                 DEFAULT: {
                     css: {
-                        "ul li": {
-                            "&::before": {
-                                backgroundColor: "#1440aa",
-                            },
-                        },
+                        // "ul li": {
+                        //     "&::before": {
+                        //         backgroundColor: "#1440aa",
+                        //     },
+                        // },
                         strong: {
                             color: "#1440aa",
                             fontWeight: 700,
@@ -128,5 +128,5 @@ module.exports = {
             borderColor: ["focus"],
         },
     },
-    plugins: [require("tailwind-scrollbar"), require("@tailwindcss/typography")],
+    plugins: [require("tailwind-scrollbar"), require("@tailwindcss/typography"), require("@tailwindcss/aspect-ratio")],
 }
