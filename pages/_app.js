@@ -12,6 +12,23 @@ const App = ({ Component, pageProps }) => {
             <Head>
                 <title>Cash Flow</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                <meta
+                    name="keywords"
+                    content="cash, flow, cash flow, finance, dcf, model, modelling, valuation, analysis, automation, automate, financial"
+                />
+                <meta
+                    name="description"
+                    content="Cash Flow is an automated financial modelling and analyst training platform that builds financial models in minutes, not weeks. Financial analysts can now build faster and learn valuation techniques at an accelerated pace. The platform also provides a free crash course for those new to valuation and financial modelling, lowering its barrier to entry."
+                />
+                <meta
+                    name="subject"
+                    content="The automated financial modelling and analyst training platform that allows you to build models in minutes, not weeks. "
+                />
+                <meta name="copyright" content="Cash Flow" />
+                <meta name="Classification" content="Business" />
+                <meta name="author" content="Park Yeung" />
+                <meta name="url" content="https://cash-flow-app.vercel.app/" />
+                <meta name="identifier-URL" content="https://cash-flow-app.vercel.app/" />
             </Head>
             <div className="flex flex-col h-screen">
                 <UserProvider>

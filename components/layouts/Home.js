@@ -47,7 +47,7 @@ const Home = () => {
                         <div className="bg-accent w-12 h-1 mb-8"></div>
                         <div className="text-2xl pr-3">
                             Building a financial model can be tedious and time-consuming. Cash Flow is a training and
-                            automation tool to help you bootstrap that process.
+                            automation platform to help you bootstrap that process.
                         </div>
                         <div
                             onClick={handleGetStartedClick}
