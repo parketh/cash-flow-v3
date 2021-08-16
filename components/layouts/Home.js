@@ -97,7 +97,10 @@ const Home = () => {
                         <div className="bg-accent w-12 h-1 mb-8"></div>
                         <div className="text-2xl font-semibold mb-8 pt-4">🏃 How do I get started?</div>
                         <div className="bodyText">
-                            <span>Read the {""}</span>
+                            <a href="/api/auth/login">
+                                <span className="textLink">Create an account, </span>
+                            </a>
+                            <span>then read the {""}</span>
                             <Link href="/docs" passHref>
                                 <span className="textLink">documentation</span>
                             </Link>{" "}
