@@ -29,6 +29,21 @@ const App = ({ Component, pageProps }) => {
                 <meta name="author" content="Park Yeung" />
                 <meta name="url" content="https://cash-flow-app.vercel.app/" />
                 <meta name="identifier-URL" content="https://cash-flow-app.vercel.app/" />
+
+                <meta name="og:title" content="Cash Flow" />
+                <meta name="og:type" content="website" />
+                <meta name="og:url" content="https://cash-flow-app.vercel.app/" />
+                <meta name="og:image" content="https://cash-flow-app.vercel.app/images/preview.png" />
+                <meta name="og:site_name" content="Cash Flow" />
+                <meta
+                    name="og:description"
+                    content="Cash Flow is an automated financial modelling and analyst training platform that builds financial models in minutes, not weeks. Financial analysts can now build faster and learn valuation techniques at an accelerated pace. The platform also provides a free crash course for those new to valuation and financial modelling, lowering its barrier to entry."
+                />
+                <meta name="og:email" content="yeungparkhay@gmail.com" />
+                <meta name="og:locality" content="London" />
+                <meta name="og:region" content="London" />
+                <meta name="og:postal-code" content="N1" />
+                <meta name="og:country-name" content="UK" />
             </Head>
             <div className="flex flex-col h-screen">
                 <UserProvider>

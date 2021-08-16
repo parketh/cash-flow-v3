@@ -116,8 +116,8 @@ const Docs = () => {
                     To resolve the error, go back through the form and fix any fields you have filled out incorrectly,
                     which should be highlighted as shown below.
                 </div>
-                <div class="ml-4 font-bold text-xs mb-1">Company Name</div>
-                <input type="text" class="ml-4 inputField w-60 border-1 border-accent" disabled />
+                <div className="ml-4 font-bold text-xs mb-1">Company Name</div>
+                <input type="text" className="ml-4 inputField w-60 border-1 border-accent" disabled />
                 <div className="ml-4 text-xs text-accent">Company Name cannot be blank!</div>
                 <div className="bodyTextSmall mt-8">
                     If you're not yet sure what settings you would like to use, or you don't have a Capital IQ
